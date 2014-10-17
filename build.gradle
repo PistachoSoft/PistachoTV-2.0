@@ -1,0 +1,25 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+
+	dependencies {
+		classpath (group: 'com.sahlbach.gradle', name: 'gradle-jetty-eclipse-plugin', version: '1.9.+')
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jettyEclipse'
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+	compile 'com.google.code.gson:gson:2.3'
+}
