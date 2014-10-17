@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html lang="en" ng-app="producciones">
 <head>
     <meta
             http-equiv="Content-Type"
@@ -56,7 +56,6 @@
                     <input type="text" class="form-control" value="" placeholder="something..." name="q">
                     <span class="input-group-addon">in</span>
                     <select name="filter" class="form-control">
-                        <option value=""></option>
                         <option value="productions">Productions</option>
                         <option value="users">Users</option>
                     </select>
@@ -66,9 +65,38 @@
     </div>
 </div>
 
+<div class="container">
+	<div class="row myPanel">
+		<div class="jumbotron" style="display:">
+			<h3>Results</h3>
+			
+			<div ng-controller="mostrarController as mostrar">
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="movie in mostrar.movies | limitTo:5 | orderBy:'+title'">
+						<produccion></produccion>
+					</li>
+				</ul>
+			</div>
+
+			<!-- ajax loader -->
+			<!-- <div id="ajaxLoader" class="center-text" style="display:">
+				<p>
+					<img src="./img/ajax-loader.gif">
+					<br>
+					Retrieving data
+				</p>
+			</div>-->
+		</div>
+	</div>
+
+</div>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="./js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="./js/bootstrap.min.js"></script>
+<!-- Angularjs -->
+<script src="./js/angular.min.js"></script>
+<script src="./js/producciones.js"></script>
 
 </body></html>
