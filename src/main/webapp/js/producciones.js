@@ -34,6 +34,66 @@ var app = angular.module('producciones',[]);
 			         },
 			        ],
 		},
+		{
+			title: 'Como entrenar a tu dragon',
+			year: 2013,
+			cast: 'Hiccup',
+			images: [
+			         {
+			        	thumb: './img/ajax-loader.gif' 
+			         },
+			        ],
+		},
+		{
+			title: 'Como entrenar a tu dragon 2',
+			year: 2014,
+			cast: 'Hiccup',
+			images: [
+			         {
+			        	thumb: './img/ajax-loader.gif' 
+			         },
+			        ],
+		},
+		{
+			title: 'Paranormal Activity',
+			year: 2011,
+			cast: 'Toby',
+			images: [
+			         {
+			        	thumb: './img/ajax-loader.gif' 
+			         },
+			        ],
+		},
+		{
+			title: 'Paranormal Activity 2',
+			year: 2012,
+			cast: 'Toby',
+			images: [
+			         {
+			        	thumb: './img/ajax-loader.gif' 
+			         },
+			        ],
+		},
+		{
+			title: 'Paranormal Activity 3',
+			year: 2013,
+			cast: 'Toby',
+			images: [
+			         {
+			        	thumb: './img/ajax-loader.gif' 
+			         },
+			        ],
+		},
+		{
+			title: 'Paranormal Activity 4',
+			year: 2014,
+			cast: 'Toby',
+			images: [
+			         {
+			        	thumb: './img/ajax-loader.gif' 
+			         },
+			        ],
+		},
 	];
 })();
 

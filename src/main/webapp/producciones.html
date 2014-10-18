@@ -14,6 +14,7 @@
     <!-- Bootstrap -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/pistachocss.css" rel="stylesheet">
+    <link href="./css/rig.css" rel="stylesheet">
 
 </head>
 
@@ -70,12 +71,12 @@
 
 <div class="container">
 	<div class="row myPanel">
-		<div class="jumbotron" style="display:">
+		<div class="jumbotron">
 			<h3>Results</h3>
-			
+			<br>
 			<div ng-controller="mostrarController as mostrar">
-				<ul class="list-group">
-					<li class="list-group-item" ng-repeat="movie in mostrar.movies | limitTo:5 | orderBy:'+title'">
+				<ul class="rig">
+					<li ng-repeat="movie in mostrar.movies | orderBy:'+title'">
 						<produccion></produccion>
 					</li>
 				</ul>
