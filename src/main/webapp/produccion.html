@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en" ng-app="usuarios">
+<html lang="en" ng-app="produccion">
 <head>
     <meta
             http-equiv="Content-Type"
@@ -33,10 +33,10 @@
                 <li>
                     <a href="./index.html">PistachoTV</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="./producciones.html">Películas</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="./usuarios.html">Usuarios</a>
                 </li>
                 <li>
@@ -70,25 +70,8 @@
 
 <div class="container">
 	<div class="row myPanel">
-		<div class="jumbotron" style="display:">
-			<h3>Results</h3>
-			<br>
-			<div ng-controller="mostrarController as mostrar">
-				<ul class="list-group">
-					<li class="list-group-item hoverable-item" ng-repeat="user in mostrar.users | limitTo:5 | orderBy:'+name'">
-						<usuario></usuario>
-					</li>
-				</ul>
-			</div>
-
-			<!-- ajax loader -->
-			<!-- <div id="ajaxLoader" class="center-text" style="display:">
-				<p>
-					<img src="./img/ajax-loader.gif">
-					<br>
-					Retrieving data
-				</p>
-			</div>-->
+		<div ng-controller="mostrarController as mostrar">
+			<produccion></produccion>
 		</div>
 	</div>
 
@@ -100,6 +83,6 @@
 <script src="./js/bootstrap.min.js"></script>
 <!-- Angularjs -->
 <script src="./js/angular.min.js"></script>
-<script src="./js/usuarios.js"></script>
+<script src="./js/produccion.js"></script>
 
 </body></html>

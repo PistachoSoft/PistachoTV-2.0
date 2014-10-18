@@ -55,3 +55,12 @@ body {
 .padding-10-bot {
     padding-top: 10px;
 }
+
+.hoverable-item {
+	border: 1px solid #ABABAB;
+}
+
+.hoverable-item:hover {
+	border-color: #697;
+	border-width: 2px;
+}

@@ -76,7 +76,7 @@
 			<br>
 			<div ng-controller="mostrarController as mostrar">
 				<ul class="rig">
-					<li style="height: 350px" ng-repeat="movie in mostrar.movies | orderBy:'+title'">
+					<li class="hoverable-item" onclick="location.href='produccion.html';" style="height: 300px" ng-repeat="movie in mostrar.movies | orderBy:'+title'">
 						<produccion></produccion>
 					</li>
 				</ul>
