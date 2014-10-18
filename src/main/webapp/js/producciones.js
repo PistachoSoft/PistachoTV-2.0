@@ -40,6 +40,6 @@ var app = angular.module('producciones',[]);
 app.directive('produccion', function(){
 	return {
 		restrict: 'E',
-		templateUrl: 'movie.html'
+		templateUrl: 'movieTemplate.html'
 	};
 });
