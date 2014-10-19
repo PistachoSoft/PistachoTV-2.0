@@ -17,7 +17,6 @@ var app = angular.module('producciones',[]);
 		{
 			title: 'Braveheart',
 			year: 1995,
-			cast: 'Mel Gibson',
 			images: [
 			         {
 			        	thumb: './img/braveheart_thumb.jpg' 
@@ -27,7 +26,6 @@ var app = angular.module('producciones',[]);
 		{
 			title: 'Brave',
 			year: 2012,
-			cast: 'Merida',
 			images: [
 			         {
 			        	thumb: './img/brave_thumb.jpg' 
@@ -37,7 +35,6 @@ var app = angular.module('producciones',[]);
 		{
 			title: 'Como entrenar a tu dragon',
 			year: 2010,
-			cast: 'Hiccup',
 			images: [
 			         {
 			        	thumb: './img/httyd_thumb.jpg' 
@@ -47,7 +44,6 @@ var app = angular.module('producciones',[]);
 		{
 			title: 'Como entrenar a tu dragon 2',
 			year: 2014,
-			cast: 'Hiccup',
 			images: [
 			         {
 			        	thumb: './img/httyd_2_thumb.jpg' 
@@ -57,7 +53,6 @@ var app = angular.module('producciones',[]);
 		{
 			title: 'Paranormal Activity',
 			year: 2007,
-			cast: 'Toby',
 			images: [
 			         {
 			        	thumb: './img/paranormal_activity_thumb.jpg' 
@@ -67,7 +62,6 @@ var app = angular.module('producciones',[]);
 		{
 			title: 'Paranormal Activity 2',
 			year: 2010,
-			cast: 'Toby',
 			images: [
 			         {
 			        	thumb: './img/paranormal_activity_2_thumb.jpg' 
@@ -77,7 +71,6 @@ var app = angular.module('producciones',[]);
 		{
 			title: 'Paranormal Activity 3',
 			year: 2011,
-			cast: 'Toby',
 			images: [
 			         {
 			        	thumb: './img/paranormal_activity_3_thumb.jpg' 
@@ -87,7 +80,6 @@ var app = angular.module('producciones',[]);
 		{
 			title: 'Paranormal Activity 4',
 			year: 2012,
-			cast: 'Toby',
 			images: [
 			         {
 			        	thumb: './img/paranormal_activity_4_thumb.jpg' 
