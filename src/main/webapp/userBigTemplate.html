@@ -1,0 +1,24 @@
+<div class="jumbotron" style="text-align: left">
+    <img height="100%" class="img img-responsive pull-right" ng-src="{{mostrar.users.avatar}}"/>
+    <h2 class="text-center">{{mostrar.users.name}} {{mostrar.users.surname}}</h2>
+    <dl class="dl-horizontal">
+        <dt class="pull-left">Date of birth:</dt>
+        <dd>{{mostrar.users.year}}</dd>
+        <dt class="pull-left">Email:</dt>
+        <dd>{{mostrar.users.email}}</dd>
+        <dt class="pull-left">Phone:</dt>
+        <dd>{{mostrar.users.phone}}</dd>
+        <dt class="pull-left">Address:</dt>
+        <dd>{{mostrar.users.address}}</dd>
+    </dl>
+    <br>
+    <ul class="list-group">
+        <li class="list-group-item hoverable-item" ng-repeat="comment in mostrar.users.comments | orderBy:'-date'">
+            <h3 class="pull-left">{{comment.production}}</h3>
+            <br>
+            <h4 class="pull-right">{{comment.date}}</h4>
+            <br>
+            <p>{{comment.text}}</p>
+        </li>
+    </ul>
+</div>

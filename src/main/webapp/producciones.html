@@ -53,15 +53,15 @@
                 </form>
             </ul>
         </div>
-        <form class="padding-10-bot" name="browser" method="post" action="servlet-de-busqueda">
+        <form class="padding-10-bot" name="browser" method="get" action="search">
             <div class="form-group ">
                 <div class="input-group">
                     <span class="input-group-addon">Search</span>
                     <input type="text" class="form-control" value="" placeholder="something..." name="q">
                     <span class="input-group-addon">in</span>
-                    <select name="filter" class="form-control">
-                        <option value="productions">Productions</option>
-                        <option value="users">Users</option>
+                    <select name="t" class="form-control">
+                        <option value="p">Productions</option>
+                        <option value="u">Users</option>
                     </select>
                 </div>
             </div>
@@ -76,20 +76,12 @@
 			<br>
 			<div ng-controller="mostrarController as mostrar">
 				<ul class="rig">
-					<li class="hoverable-item" onclick="location.href='produccion.html';" style="height: 300px" ng-repeat="movie in mostrar.movies | orderBy:'+title'">
+                    <!--onclick="location.href='produccion.html';"-->
+					<li class="hoverable-item" style="height: 350px" ng-repeat="movie in mostrar.movies | orderBy:'+title'">
 						<produccion></produccion>
 					</li>
 				</ul>
 			</div>
-
-			<!-- ajax loader -->
-			<!-- <div id="ajaxLoader" class="center-text" style="display:">
-				<p>
-					<img src="./img/ajax-loader.gif">
-					<br>
-					Retrieving data
-				</p>
-			</div>-->
 		</div>
 	</div>
 

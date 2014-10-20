@@ -1,5 +1,5 @@
-<div class="jumbotron" style="text-align: left; height: 400px">
-	<img height="100%" class="img img-responsive pull-right" ng-src="{{mostrar.movies.images[0].http}}"></img>
+<div class="jumbotron" style="text-align: left">
+	<img height="100%" class="img img-responsive pull-right" ng-src="{{mostrar.movies.poster}}"/>
 	<h2 class="text-center">{{mostrar.movies.title}}</h2>
 	<dl class="dl-horizontal">
 		<dt class="pull-left">Year:</dt>
@@ -11,4 +11,14 @@
 		<dt class="pull-left">Genre:</dt>
 		<dd>{{mostrar.movies.genre}}</dd>
 	</dl>
+    <br>
+    <ul class="list-group">
+        <li class="list-group-item hoverable-item" ng-repeat="comment in mostrar.movies.comments | orderBy:'-date'">
+            <h3 class="pull-left">{{comment.user}}</h3>
+            <br>
+            <h4 class="pull-right">{{comment.date}}</h4>
+            <br>
+            <p>{{comment.text}}</p>
+        </li>
+    </ul>
 </div>

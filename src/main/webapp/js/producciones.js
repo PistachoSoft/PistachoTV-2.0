@@ -15,77 +15,53 @@ var app = angular.module('producciones',[]);
 	
 	var movie = [
 		{
+            _id: 1,
 			title: 'Braveheart',
 			year: 1995,
-			images: [
-			         {
-			        	thumb: './img/braveheart_thumb.jpg' 
-			         },
-			        ],
+			thumbnail: './img/braveheart_thumb.jpg'
 		},
 		{
+            _id: 2,
 			title: 'Brave',
 			year: 2012,
-			images: [
-			         {
-			        	thumb: './img/brave_thumb.jpg' 
-			         },
-			        ],
+			thumbnail: './img/brave_thumb.jpg'
 		},
 		{
+            _id: 3,
 			title: 'Como entrenar a tu dragon',
 			year: 2010,
-			images: [
-			         {
-			        	thumb: './img/httyd_thumb.jpg' 
-			         },
-			        ],
+			thumbnail: './img/httyd_thumb.jpg'
 		},
 		{
+            _id: 4,
 			title: 'Como entrenar a tu dragon 2',
 			year: 2014,
-			images: [
-			         {
-			        	thumb: './img/httyd_2_thumb.jpg' 
-			         },
-			        ],
+			thumbnail: './img/httyd_2_thumb.jpg'
 		},
 		{
+            _id: 5,
 			title: 'Paranormal Activity',
 			year: 2007,
-			images: [
-			         {
-			        	thumb: './img/paranormal_activity_thumb.jpg' 
-			         },
-			        ],
+			thumbnail: './img/paranormal_activity_thumb.jpg'
 		},
 		{
+            _id: 6,
 			title: 'Paranormal Activity 2',
 			year: 2010,
-			images: [
-			         {
-			        	thumb: './img/paranormal_activity_2_thumb.jpg' 
-			         },
-			        ],
+			thumbnail: './img/paranormal_activity_2_thumb.jpg'
 		},
 		{
+            _id: 7,
 			title: 'Paranormal Activity 3',
 			year: 2011,
-			images: [
-			         {
-			        	thumb: './img/paranormal_activity_3_thumb.jpg' 
-			         },
-			        ],
+			thumbnail: './img/paranormal_activity_3_thumb.jpg'
 		},
 		{
+            _id: 8,
 			title: 'Paranormal Activity 4',
 			year: 2012,
-			images: [
-			         {
-			        	thumb: './img/paranormal_activity_4_thumb.jpg' 
-			         },
-			        ],
-		},
+			thumbnail: './img/paranormal_activity_4_thumb.jpg'
+		}
 	];
 })();
 

@@ -7,35 +7,23 @@ var app = angular.module('usuarios',[]);
 	
 	var user = [
         {
+            _id: 1,
         	name: 'David Recuenco',
         	email: 'david.recuencogadea@pistachosoft.com',
-        	avatar: [
-        	         {
-        	        	 full: './img/favicon.png',
-        	        	 thumb: './img/ajax-loader.gif',
-        	         },
-        	        ],
+        	thumbnail: './img/ajax-loader.gif'
         },
         {
+            _id: 2,
         	name: 'Adrian Reyes',
         	email: 'adrian@pistachosoft.com',
-        	avatar: [
-        	         {
-        	        	 full: './img/favicon.png',
-        	        	 thumb: './img/ajax-loader.gif',
-        	         },
-        	        ],
+        	thumbnail: './img/ajax-loader.gif'
         },
         {
+            _id: 3,
         	name: 'Pistacho Anon',
         	email: 'anon@pistachosoft.com',
-        	avatar: [
-        	         {
-        	        	 full: './img/favicon.png',
-        	        	 thumb: './img/ajax-loader.gif',
-        	         },
-        	        ],
-        },
+        	thumbnail: './img/ajax-loader.gif'
+        }
        ];
 })();
 

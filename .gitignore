@@ -1,14 +1,11 @@
 /bin/
-/bin/
-/bin/
-/bin/
 /build/
 /.classpath
-/.settings
+/.settings/
 /.project
 /.gradle/
-/bin/
-/bin/
+/.idea/
+/PistachoTV-2.0.iml
 /bin/
 /bin/
 /bin/

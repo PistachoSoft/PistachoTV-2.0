@@ -52,15 +52,15 @@
                 </form>
             </ul>
         </div>
-        <form class="padding-10-bot" name="browser" method="post" action="servlet-de-busqueda">
+        <form class="padding-10-bot" name="browser" method="get" action="search">
             <div class="form-group ">
                 <div class="input-group">
                     <span class="input-group-addon">Search</span>
                     <input type="text" class="form-control" value="" placeholder="something..." name="q">
                     <span class="input-group-addon">in</span>
-                    <select name="filter" class="form-control">
-                        <option value="productions">Productions</option>
-                        <option value="users">Users</option>
+                    <select name="t" class="form-control">
+                        <option value="u">Users</option>
+                        <option value="p">Productions</option>
                     </select>
                 </div>
             </div>
@@ -70,25 +70,17 @@
 
 <div class="container">
 	<div class="row myPanel">
-		<div class="jumbotron" style="display:">
+		<div class="jumbotron">
 			<h3>Results</h3>
 			<br>
 			<div ng-controller="mostrarController as mostrar">
 				<ul class="list-group">
+                    <!--onclick="location.href='usuario.html';"-->
 					<li class="list-group-item hoverable-item" ng-repeat="user in mostrar.users | limitTo:5 | orderBy:'+name'">
 						<usuario></usuario>
 					</li>
 				</ul>
 			</div>
-
-			<!-- ajax loader -->
-			<!-- <div id="ajaxLoader" class="center-text" style="display:">
-				<p>
-					<img src="./img/ajax-loader.gif">
-					<br>
-					Retrieving data
-				</p>
-			</div>-->
 		</div>
 	</div>
 

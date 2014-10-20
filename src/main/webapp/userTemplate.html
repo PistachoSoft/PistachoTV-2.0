@@ -1,6 +1,8 @@
-<h3> 
-	<em class="pull-left"><img ng-src="{{user.avatar[0].thumb}}"/></em>						 
-	{{user.name}}
-</h3>
-<button type="button" class="btn btn-primary pull-right">More...</button>
-<p> {{user.email}} </p>
+<form method="GET" action="display">
+    <input type="hidden" name="t" value="u"/>
+    <input type="hidden" name="id" value="{{user._id}}"/>
+    <img class="pull-left" ng-src="{{user.thumbnail}}"/>
+    <input type="submit" class="btn btn-primary pull-right" value="More..."/>
+    <h3> {{user.name}} </h3>
+    <h4> {{user.email}} </h4>
+</form>
