@@ -1,19 +1,19 @@
 var app = angular.module('produccion',[]);
 
 (function(){
-	app.controller('mostrarController', function(){
-	//app.controller('mostrarController', [ '$http', function($http){
-		this.movies = movie;
-		//var mostrar = this;
-		//mostrar.movies = [ ];
+	//app.controller('mostrarController', function(){
+	app.controller('mostrarController', [ '$http', function($http){
+		//this.movies = movie;
+		var mostrar = this;
+		mostrar.movies = [ ];
 		
-		//$http({ method: 'GET', url: '/loadMovies' }).success(function(data){
-		//	mostrar.movies = data;
-		//});
-	});
-	//}]);
+		$http({ method: 'GET', url: '/display?t=p&id='+localStorage.prod_id }).success(function(data){
+			mostrar.movies = data;
+		});
+	//});
+	}]);
 	
-	var movie =
+	/*var movie =
 		{
             _id: 1,
 			title: 'Braveheart',
@@ -41,7 +41,7 @@ var app = angular.module('produccion',[]);
                     text: 'Ok'
                 }
             ]
-		};
+		};*/
 })();
 
 app.directive('produccion', function(){

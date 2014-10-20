@@ -1,19 +1,19 @@
 var app = angular.module('usuario',[]);
 
 (function(){
-    app.controller('mostrarController', function(){
-        //app.controller('mostrarController', [ '$http', function($http){
-        this.users = user;
-        //var mostrar = this;
-        //mostrar.movies = [ ];
+    //app.controller('mostrarController', function(){
+    app.controller('mostrarController', [ '$http', function($http){
+        //this.users = user;
+        var mostrar = this;
+        mostrar.movies = [ ];
 
-        //$http({ method: 'GET', url: '/loadMovies' }).success(function(data){
-        //	mostrar.movies = data;
-        //});
-    });
-    //}]);
+        $http({ method: 'GET', url: '/display?t=u&id='+localStorage.user_id }).success(function(data){
+        	mostrar.movies = data;
+        });
+    //});
+    }]);
 
-    var user =
+    /*var user =
     {
         _id: 1,
         name: 'David',
@@ -36,7 +36,7 @@ var app = angular.module('usuario',[]);
             }
         ]
 
-    };
+    };*/
 })();
 
 app.directive('usuario', function(){

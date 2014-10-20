@@ -28,6 +28,7 @@ dependencies {
 }
 
 // Scala dependencies
+
 dependencies{
     compile 'org.scala-lang:scala-library-all:2.11.2'
     compile 'org.spark-project.akka:akka-actor_2.11:2.3.4-spark'

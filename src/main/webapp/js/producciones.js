@@ -1,19 +1,19 @@
 var app = angular.module('producciones',[]);
 
 (function(){
-	app.controller('mostrarController', function(){
-	//app.controller('mostrarController', [ '$http', function($http){
-		this.movies = movie;
-		//var mostrar = this;
-		//mostrar.movies = [ ];
+	//app.controller('mostrarController', function(){
+	app.controller('mostrarController', [ '$http', function($http){
+//		this.movies = movie;
+		var mostrar = this;
+		mostrar.movies = [ ];
 		
-		//$http({ method: 'GET', url: '/loadMovies' }).success(function(data){
-		//	mostrar.movies = data;
-		//});
-	});
-	//}]);
+		$http({ method: 'GET', url: '/search?t=p&id='+localStorage.query }).success(function(data){
+			mostrar.movies = data;
+		});
+	//});
+	}]);
 	
-	var movie = [
+	/*var movie = [
 		{
             _id: 1,
 			title: 'Braveheart',
@@ -62,7 +62,33 @@ var app = angular.module('producciones',[]);
 			year: 2012,
 			thumbnail: './img/paranormal_activity_4_thumb.jpg'
 		}
-	];
+	];*/
+})();
+
+(function(){
+    app.controller('searchController', function($scope){
+        $scope.searchClick = function(){
+            var query = document.getElementById('searchInputQuery').value;
+            var type = document.getElementById('searchInputType').value;
+            localStorage.query=query;
+            if(type==='p'){
+                window.location.replace("producciones.html");
+            }else if(type==='u'){
+                window.location.replace("usuarios.html");
+            }else{
+                window.location.replace('404');
+            }
+        };
+    });
+})();
+
+(function(){
+    app.controller('clickController', function($scope){
+        $scope.myClick = function(id){
+            localStorage.prod_id=id;
+            window.location.replace("produccion.html");
+        };
+    });
 })();
 
 app.directive('produccion', function(){

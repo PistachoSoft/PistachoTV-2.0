@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
+<html lang="en" ng-app="index">
 	<head>
 		<meta 
 			http-equiv="Content-Type" 
@@ -60,46 +60,25 @@
 				<div class="jumbotron">
 					<h3>Welcome to PistachoTV 2.0!</h3>
 					<br>
-					<form class="" name="browser" method="get" action="search">
+                    <div>
+					<!--<form class="" name="browser" method="get" action="search">-->
 						<div class="form-group">
-							<div class="input-group">
+							<div class="input-group" ng-controller="searchController">
 								<span class="input-group-addon">Search</span>
-								<input type="text" class="form-control" value="" placeholder="something..." name="q">
+								<input id="searchInputQuery" type="text" class="form-control" value="" placeholder="something..." name="q" ng-keyup="$event.keyCode == 13 && searchClick()">
 								<span class="input-group-addon">in</span>
-								<select name="t" class="form-control">
+								<select id="searchInputType" name="t" class="form-control">
 									<option value="p">Productions</option>
 									<option value="u">Users</option>
 								</select>
 							</div>
 						</div>
 						<br>
-						<input type="submit" class="btn btn-primary" name="browserButton" value="Find!"/>
-					</form>
-				</div>
-				
-				<div class="jumbotron" style="display:none">
-					<h3>Results</h3>
-		
-					<!-- ajax loader -->
-					<div id="ajaxLoader" class="center-text" style="display:none">
-						<p>
-							<img src="./img/ajax-loader.gif">
-							<br>
-							Retrieving data
-						</p>
+						<!--<input type="submit" class="btn btn-primary" value="Find!"/>-->
+                        <div ng-controller="searchController">
+                            <input type="button" class="btn btn-primary" value="Find!" ng-click="searchClick()"/>
+                        </div>
 					</div>
-					
-					<!--<table>
-						<tbody>
-							<td>
-								<th>Image</th>
-								<th>Production</th>
-								<th>Year</th>
-							</td>
-						</tbody>
-					</table>-->
-					
-					
 				</div>
 			</div>
 		</div>
@@ -108,5 +87,8 @@
 	    <script src="./js/jquery.min.js"></script>
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 	    <script src="./js/bootstrap.min.js"></script>
+        <!-- Angularjs -->
+        <script src="./js/angular.min.js"></script>
+        <script src="./js/index.js"></script>
 
 </body></html>

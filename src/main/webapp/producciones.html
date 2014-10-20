@@ -53,19 +53,20 @@
                 </form>
             </ul>
         </div>
-        <form class="padding-10-bot" name="browser" method="get" action="search">
+        <div>
+        <!--<form class="padding-10-bot" name="browser" method="get" action="search">-->
             <div class="form-group ">
-                <div class="input-group">
+                <div class="input-group" ng-controller="searchController">
                     <span class="input-group-addon">Search</span>
-                    <input type="text" class="form-control" value="" placeholder="something..." name="q">
+                    <input id="searchInputQuery" type="text" class="form-control" value="" placeholder="something..." name="q" ng-keyup="$event.keyCode == 13 && searchClick()">
                     <span class="input-group-addon">in</span>
-                    <select name="t" class="form-control">
+                    <select id="searchInputType" name="t" class="form-control">
                         <option value="p">Productions</option>
                         <option value="u">Users</option>
                     </select>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
@@ -75,10 +76,10 @@
 			<h3>Results</h3>
 			<br>
 			<div ng-controller="mostrarController as mostrar">
-				<ul class="rig">
+				<ul class="rig" ng-hide="mostrar.movies.length">
                     <!--onclick="location.href='produccion.html';"-->
-					<li class="hoverable-item" style="height: 350px" ng-repeat="movie in mostrar.movies | orderBy:'+title'">
-						<produccion></produccion>
+					<li class="hoverable-item" style="height: 350px" ng-repeat="movie in mostrar.movies | limitTo:5 | orderBy:'+title'">
+						<produccion ng-controller="clickController"></produccion>
 					</li>
 				</ul>
 			</div>
