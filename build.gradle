@@ -1,25 +1,61 @@
-buildscript {
-	repositories {
-		jcenter()
-	}
-
-	dependencies {
-		classpath (group: 'com.sahlbach.gradle', name: 'gradle-jetty-eclipse-plugin', version: '1.9.+')
-	}
-}
-
 apply plugin: 'java'
+apply plugin: 'scala'
 apply plugin: 'war'
 apply plugin: 'jettyEclipse'
 apply plugin: 'eclipse'
 apply plugin: 'eclipse-wtp'
 
+sourceCompatibility = 1.8
+version = '1.0'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath (group: 'com.sahlbach.gradle', name: 'gradle-jetty-eclipse-plugin', version: '1.9.+')
+    }
+}
 dependencies {
-	providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
-	compile 'com.google.code.gson:gson:2.3'
+    providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+    compile 'mysql:mysql-connector-java:5.1.33'
+    compile 'commons-httpclient:commons-httpclient:3.1'
+}
+
+// Scala dependencies
+dependencies{
+    compile 'org.scala-lang:scala-library-all:2.11.2'
+    compile 'org.spark-project.akka:akka-actor_2.11:2.3.4-spark'
+    compile 'org.json4s:json4s-ext_2.11:3.2.10'
+    compile 'org.json4s:json4s-jackson_2.11:3.2.10'
+    compile 'com.jolbox:bonecp:0.8.0.RELEASE'
+    providedCompile 'org.slf4j:slf4j-api:1.7.7'
+}
+
+task fetchData(type: JavaExec, dependsOn: classes) {
+    if ('fetchData' in gradle.startParameter.taskNames &&
+            gradle.startParameter.logLevel < LogLevel.QUIET) {
+        println "Note: The task 'fetchData' works best in quiet mode (gradle -q fetchData)"
+    }
+    group 			= 'PistachoTV DB'
+    description 	= 'Fetch data from OMDB api'
+    main 			= 'DataBase.FetchData'
+    classpath 		= sourceSets.main.runtimeClasspath
+    standardInput	= System.in
+}
+
+task loadData(type: JavaExec, dependsOn: classes) {
+    if(project.hasProperty('myargs')){
+        args(myargs.split(','))
+    }
+    group 			= 'PistachoTV DB'
+    description 	= 'Dumps all data on [rawData.json] into the DB'
+    main 			= 'DataBase.LoadData'
+    classpath 		= sourceSets.main.runtimeClasspath
+    standardInput	= System.in
 }
