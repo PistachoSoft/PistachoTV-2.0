@@ -6,8 +6,8 @@ var app = angular.module('producciones',[]);
 //		this.movies = movie;
 		var mostrar = this;
 		mostrar.movies = [ ];
-		
-		$http({ method: 'GET', url: '/search?t=p&id='+localStorage.query }).success(function(data){
+
+		$http({ method: 'GET', url: '/search?t=p&q='+localStorage.query }).success(function(data){
 			mostrar.movies = data;
 		});
 	//});

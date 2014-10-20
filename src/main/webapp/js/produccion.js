@@ -8,6 +8,7 @@ var app = angular.module('produccion',[]);
 		mostrar.movies = [ ];
 		
 		$http({ method: 'GET', url: '/display?t=p&id='+localStorage.prod_id }).success(function(data){
+            //console.log(data);
 			mostrar.movies = data;
 		});
 	//});

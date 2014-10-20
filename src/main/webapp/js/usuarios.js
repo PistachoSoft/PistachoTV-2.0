@@ -7,7 +7,7 @@ var app = angular.module('usuarios',[]);
         var mostrar = this;
         mostrar.users = [ ];
 
-        $http({ method: 'GET', url: '/search?t=u&id='+localStorage.query }).success(function(data){
+        $http({ method: 'GET', url: '/search?t=u&q='+localStorage.query }).success(function(data){
             mostrar.movies = data;
         });
     //});
