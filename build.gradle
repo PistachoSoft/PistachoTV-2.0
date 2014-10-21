@@ -5,7 +5,7 @@ apply plugin: 'jettyEclipse'
 apply plugin: 'eclipse'
 apply plugin: 'eclipse-wtp'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.7
 version = '1.0'
 
 repositories {

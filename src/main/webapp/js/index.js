@@ -1,5 +1,7 @@
 var app = angular.module('index',[]);
 
+localStorage.removeItem('query');
+
 (function(){
     app.controller('searchController', function($scope){
         $scope.searchClick = function(){

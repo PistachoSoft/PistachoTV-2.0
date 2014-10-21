@@ -7,7 +7,17 @@ var app = angular.module('usuarios',[]);
         var mostrar = this;
         mostrar.users = [ ];
 
-        $http({ method: 'GET', url: '/search?t=u&q='+localStorage.query }).success(function(data){
+        var searchUrl = '';
+
+        if(localStorage.query===undefined){
+            searchUrl = '/search?t=u&p=1';
+        }else{
+            searchUrl = '/search?t=u&q='+localStorage.query+'&p=1';
+        }
+
+        localStorage.removeItem('user_id');
+
+        $http({ method: 'GET', url: searchUrl }).success(function(data){
             mostrar.movies = data;
         });
     //});
@@ -46,7 +56,7 @@ var app = angular.module('usuarios',[]);
             }else if(type==='u'){
                 window.location.replace("usuarios.html");
             }else{
-                window.location.replace('404');
+                window.location.replace('404.html');
             }
         };
     });

@@ -6,11 +6,14 @@ var app = angular.module('produccion',[]);
 		//this.movies = movie;
 		var mostrar = this;
 		mostrar.movies = [ ];
-		
-		$http({ method: 'GET', url: '/display?t=p&id='+localStorage.prod_id }).success(function(data){
-            //console.log(data);
-			mostrar.movies = data;
-		});
+
+        if(isNaN(localStorage.prod_id)){
+            window.location.replace("producciones.html");
+        }else {
+            $http({ method: 'GET', url: '/display?t=p&id=' + localStorage.prod_id+'&p=1' }).success(function (data) {
+                mostrar.movies = data;
+            });
+        }
 	//});
 	}]);
 	

@@ -7,7 +7,17 @@ var app = angular.module('producciones',[]);
 		var mostrar = this;
 		mostrar.movies = [ ];
 
-		$http({ method: 'GET', url: '/search?t=p&q='+localStorage.query }).success(function(data){
+        var searchUrl = '';
+
+        if(localStorage.query===undefined){
+            searchUrl = '/search?t=p&p=1';
+        }else{
+            searchUrl = '/search?t=p&q='+localStorage.query+'&p=1';
+        }
+
+        localStorage.removeItem('prod_id');
+
+		$http({ method: 'GET', url: searchUrl }).success(function(data){
 			mostrar.movies = data;
 		});
 	//});
@@ -76,7 +86,7 @@ var app = angular.module('producciones',[]);
             }else if(type==='u'){
                 window.location.replace("usuarios.html");
             }else{
-                window.location.replace('404');
+                window.location.replace('404.html');
             }
         };
     });

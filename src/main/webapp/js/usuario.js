@@ -7,9 +7,13 @@ var app = angular.module('usuario',[]);
         var mostrar = this;
         mostrar.movies = [ ];
 
-        $http({ method: 'GET', url: '/display?t=u&id='+localStorage.user_id }).success(function(data){
-        	mostrar.movies = data;
-        });
+        if(isNaN(localStorage.user_id)){
+            window.location.replace("usuarios.html");
+        }else{
+            $http({ method: 'GET', url: '/display?t=u&id='+localStorage.user_id+'&p=1' }).success(function(data){
+                mostrar.movies = data;
+            });
+        }
     //});
     }]);
 
