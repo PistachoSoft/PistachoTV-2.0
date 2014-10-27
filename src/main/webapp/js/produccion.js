@@ -12,6 +12,7 @@ var app = angular.module('produccion',[]);
         }else {
             $http({ method: 'GET', url: '/display?t=p&id=' + localStorage.prod_id+'&p=1' }).success(function (data) {
                 mostrar.movies = data;
+                console.log(data);
             });
         }
 	//});

@@ -76,9 +76,10 @@
 			<h3>Results</h3>
 			<br>
 			<div ng-controller="mostrarController as mostrar">
-				<ul class="rig" ng-hide="mostrar.movies.length">
+                <!--ng-hide="mostrar.movies.length"-->
+				<ul class="rig" >
                     <!--onclick="location.href='produccion.html';"-->
-					<li class="hoverable-item" style="height: 350px" ng-repeat="movie in mostrar.movies | limitTo:5 | orderBy:'+title'">
+					<li class="hoverable-item" style="height: 350px" ng-repeat="movie in mostrar.movies | limitTo:20 | orderBy:'+title'">
 						<produccion ng-controller="clickController"></produccion>
 					</li>
 				</ul>

@@ -57,7 +57,7 @@ object LoadData {
     val productionList = readJson[List[PTVProduction]](Source.fromURL(getClass.getResource("/rawData.json")).mkString)
 
     for(prod <- productionList) {
-      println(writeJson(prod))
+      //println(writeJson(prod))
       addProductionDB(prod)
     }
   }

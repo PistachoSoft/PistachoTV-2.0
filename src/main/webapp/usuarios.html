@@ -77,7 +77,7 @@
 			<div ng-controller="mostrarController as mostrar">
 				<ul class="list-group" ng-hide="mostrar.users.length">
                     <!--onclick="location.href='usuario.html';"-->
-					<li class="list-group-item hoverable-item" ng-repeat="user in mostrar.users | limitTo:5 | orderBy:'+name'">
+					<li class="list-group-item hoverable-item" ng-repeat="user in mostrar.users | limitTo:20 | orderBy:'+name'">
 						<usuario ng-controller="clickController"></usuario>
 					</li>
 				</ul>

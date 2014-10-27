@@ -19,6 +19,7 @@ var app = angular.module('usuarios',[]);
 
         $http({ method: 'GET', url: searchUrl }).success(function(data){
             mostrar.movies = data;
+            console.log(data);
         });
     //});
     }]);

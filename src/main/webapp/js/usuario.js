@@ -12,6 +12,7 @@ var app = angular.module('usuario',[]);
         }else{
             $http({ method: 'GET', url: '/display?t=u&id='+localStorage.user_id+'&p=1' }).success(function(data){
                 mostrar.movies = data;
+                console.log(data);
             });
         }
     //});
