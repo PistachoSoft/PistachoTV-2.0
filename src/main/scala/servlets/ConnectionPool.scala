@@ -24,7 +24,6 @@ object ConnectionPool {
       config.setMaxConnectionsPerPartition(5)
       config.setPartitionCount(3)
       config.setCloseConnectionWatch(true)// if connection is not closed throw exception
-      config.setLogStatementsEnabled(true) // for debugging purpose
       Some(new BoneCP(config))
     } catch {
       case exception: Exception =>;
