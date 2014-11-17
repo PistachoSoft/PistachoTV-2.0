@@ -196,7 +196,7 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
         }
     })
 
-    .directive('searchBar', function(){
+    .directive('searchbar', function(){
         return {
             restrict: 'E',
             templateUrl: 'templates/searchBar.html'
