@@ -1,15 +1,30 @@
-<div class="jumbotron" style="text-align: left">
-	<img height="100%" class="img img-responsive pull-right" ng-src="{{movie.poster}}"/>
+<div class="jumbotron" style="text-align: left; height: 500px;">
+	<img height="100%" class="img img-responsive pull-right" ng-src="{{movie.image}}"/>
 	<h2 class="text-center">{{movie.title}}</h2>
+    <br>
 	<dl class="dl-horizontal">
+        <dt class="pull-left">Id:</dt>
+        <dd>{{movie._id}}</dd>
+        <dt class="pull-left">Type of production:</dt>
+        <dd>{{movie.typeProd}}</dd>
 		<dt class="pull-left">Year:</dt>
 		<dd>{{movie.year}}</dd>
+        <dt class="pull-left">Release:</dt>
+        <dd>{{movie.released}}</dd>
+        <dt class="pull-left">Rated:</dt>
+        <dd>{{movie.rated}}</dd>
+        <dt class="pull-left">Runtime:</dt>
+        <dd>{{movie.runtime}}</dd>
 		<dt class="pull-left">Director:</dt>
 		<dd>{{movie.director}}</dd>
+        <dt class="pull-left">Writer:</dt>
+        <dd>{{movie.writer}}</dd>
 		<dt class="pull-left">Actors:</dt>
 		<dd>{{movie.actors}}</dd>
 		<dt class="pull-left">Genre:</dt>
 		<dd>{{movie.genre}}</dd>
+        <dt class="pull-left">Plot:</dt>
+        <dd>{{movie.plot}}</dd>
 	</dl>
     <br>
     <ul class="list-group">
