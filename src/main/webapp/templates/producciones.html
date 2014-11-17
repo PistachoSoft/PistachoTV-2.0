@@ -45,7 +45,7 @@
 			<h3>Results</h3>
 			<br>
 			<div>
-                <!--ng-hide="mostrar.movies.length"-->
+                <span us-spinner ng-hide="hideSpinner"></span>
 				<ul class="rig" >
                     <!--onclick="location.href='produccion.html';"-->
 					<li class="hoverable-item" style="height: 350px" ng-repeat="movie in movies | limitTo:20 | orderBy:'+title'">

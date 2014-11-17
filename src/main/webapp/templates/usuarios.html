@@ -17,7 +17,7 @@
                     <a href="#/p/">Películas</a>
                 </li>
                 <li class="active">
-                    <a href="#/u">Usuarios</a>
+                    <a href="#/u/">Usuarios</a>
                 </li>
                 <li>
                     <a href="#/acerca">About</a>
@@ -45,6 +45,7 @@
 			<h3>Results</h3>
 			<br>
 			<div>
+                <span us-spinner ng-hide="hideSpinner"></span>
 				<ul class="list-group" ng-hide="users.length">
                     <!--onclick="location.href='usuario.html';"-->
 					<li class="list-group-item hoverable-item" ng-repeat="user in users | limitTo:20 | orderBy:'+name'">

@@ -1,4 +1,4 @@
-angular.module('starter', ['ui.router'])
+angular.module('starter', ['ui.router', 'angularSpinner'])
 
     .config(function($stateProvider, $urlRouterProvider){
         $stateProvider
@@ -111,8 +111,10 @@ angular.module('starter', ['ui.router'])
 
     .controller('ProductionsCtrl', ['$scope', '$http', '$stateParams', function($scope,$http,$stateParams){
         $scope.movies = [ ];
+        $scope.hideSpinner = false;
 
         $http({ method: 'GET', url: '/search?t=p&q='+$stateParams._query+'&p=1' }).success(function(data){
+            $scope.hideSpinner = true;
             $scope.movies = data;
             console.log(data);
         });
@@ -120,11 +122,13 @@ angular.module('starter', ['ui.router'])
 
     .controller('ProductionCtrl', ['$scope', '$http', '$state', '$stateParams', function($scope,$http,$state,$stateParams) {
         $scope.movie = [ ];
+        $scope.hideSpinner = false;
 
         if(isNaN($stateParams._id)){
             $state.go('p');
         }else {
             $http({ method: 'GET', url: '/display?t=p&id=' + $stateParams._id }).success(function (data) {
+                $scope.hideSpinner = true;
                 $scope.movie = data;
                 console.log(data);
             })
@@ -133,8 +137,10 @@ angular.module('starter', ['ui.router'])
 
     .controller('UsersCtrl', ['$scope', '$http', '$stateParams', function($scope,$http,$stateParams){
         $scope.users = [ ];
+        $scope.hideSpinner = false;
 
         $http({ method: 'GET', url: '/search?t=u&q='+$stateParams._query+'&p=1' }).success(function(data){
+            $scope.hideSpinner = true;
             $scope.users = data;
             console.log(data);
         });
@@ -142,11 +148,13 @@ angular.module('starter', ['ui.router'])
 
     .controller('UserCtrl', ['$scope', '$http', '$state', '$stateParams', function($scope,$http,$state,$stateParams) {
         $scope.user = [ ];
+        $scope.hideSpinner = false;
 
         if(isNaN($stateParams._id)){
             $state.go('u');
         }else {
             $http({ method: 'GET', url: '/display?t=u&id=' + $stateParams._id }).success(function (data) {
+                $scope.hideSpinner = true;
                 $scope.user = data;
                 console.log(data);
             })
