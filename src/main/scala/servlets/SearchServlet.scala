@@ -1,13 +1,14 @@
 package servlets
 
-import java.sql.ResultSet
+import java.sql.{PreparedStatement, ResultSet}
 import javax.servlet.http.{HttpServletRequest => HSReq, HttpServletResponse => HSResp, HttpServlet}
 import javax.servlet.annotation.WebServlet
 
 import org.json4s.jackson.Serialization.{write => writeJson}
 import org.json4s.DefaultFormats
-import tad.{ReturnTrait, PTVProductionMin}
+import tad.{PTVUserMin, ReturnTrait, PTVProductionMin}
 
+import scala.collection.mutable
 
 
 @WebServlet(urlPatterns = Array("/search"))
@@ -36,21 +37,26 @@ class SearchServlet extends HttpServlet{
     new PTVProductionMin(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4))
   }
 
-  /**
-   * Executes a SQL query and returns the data in json format
-   * @param query the query
-   * @return
-   */
-  private def excecuteQuery(query: String) = {
+  private def getMinUserRS(rs: ResultSet) = {
+    new PTVUserMin(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4))
+  }
 
-    var list = List[ReturnTrait]()
+  /**
+   * Executes a mysql query
+   * @param query a mysql query
+   * @param getRS a function that given a PreparedStatement generated from the query returns a ResultSet
+   * @return the query result as a json
+   */
+  private def executeQuery(query: String
+                           , getRS: (PreparedStatement) => ResultSet
+                           , getData: (ResultSet) => ReturnTrait) = {
+    var list = mutable.MutableList[ReturnTrait]()
     ConnectionPool.getConnection match{
       case Some(connection) =>
         try {
-          val statement = connection.createStatement()
-          val rs = statement.executeQuery(query)
+          val rs = getRS(connection.prepareStatement(query))
           while(rs.next()){
-            list = list.+:(getMinProductionRS(rs))
+            list += getData(rs)
           }
         } catch {
           case exception: Exception =>
@@ -58,10 +64,10 @@ class SearchServlet extends HttpServlet{
           if (!connection.isClosed) connection.close()
         }
       case None =>
-        println("Not geting connection from connection pooling")
+        println("Not getting connection from connection pooling")
     }
 
-    writeJson(list.reverse)
+    writeJson(list)
   }
 
   /**
@@ -79,18 +85,32 @@ class SearchServlet extends HttpServlet{
       case "p" =>
         dbQuery = "SELECT _id, title, year, image " +
                   "FROM production " +
-                  "WHERE title LIKE '%" + query.replace("'","\\'") + "%' " +
-                  "ORDER BY title ASC " +
+                  "WHERE title LIKE ? " +
+                  "ORDER BY title DESC " +
                   limitPage(page)
-        excecuteQuery(dbQuery)
+        executeQuery(dbQuery
+          , (st: PreparedStatement) => {
+            st.setString(1, "%" + query + "%")
+            st.executeQuery()
+          }
+          , (rs: ResultSet) => getMinProductionRS(rs)
+        )
       case "u" =>
-        resp.sendError(HSResp.SC_NOT_IMPLEMENTED)
-        null
-      case _ =>
-        resp.sendError(HSResp.SC_BAD_REQUEST)
-        null
+        dbQuery = "SELECT _id, name, surname, email " +
+          "FROM user " +
+          "WHERE email LIKE ? " +
+          "ORDER BY surname,name,email DESC " +
+          limitPage(page)
+        executeQuery(dbQuery
+          , (st: PreparedStatement) => {
+            st.setString(1,"%" + query + "%")
+            st.executeQuery()
+          }
+          , (rs: ResultSet) => getMinUserRS(rs)
+        )
     }
   }
+
 
   /**
    * Based on it's parameters, performs a search in the database return the result as json
@@ -104,15 +124,23 @@ class SearchServlet extends HttpServlet{
 
     typeSearch match {
       case "p" =>
-        dbQuery = "SELECT _id, title, year, image FROM production ORDER BY title ASC " +
+        dbQuery = "SELECT _id, title, year, image FROM production ORDER BY title DESC " +
                       limitPage(page)
-        excecuteQuery(dbQuery)
+
+        executeQuery(dbQuery
+          , (st: PreparedStatement) => st.executeQuery()
+          , (rs: ResultSet) => getMinProductionRS(rs)
+        )
       case "u" =>
-        resp.sendError(HSResp.SC_NOT_IMPLEMENTED)
-        null
-      case _ =>
-        resp.sendError(HSResp.SC_BAD_REQUEST)
-        null
+        dbQuery = "SELECT _id, name, surname, email " +
+          "FROM user " +
+          "ORDER BY surname,name,email DESC " +
+          limitPage(page)
+
+        executeQuery(dbQuery
+          , (st: PreparedStatement) => st.executeQuery()
+          , (rs: ResultSet) => getMinUserRS(rs)
+        )
     }
 
 
@@ -139,9 +167,9 @@ class SearchServlet extends HttpServlet{
     }
 
     // parameter [t] treatment
-    val typeFetch = req.getParameter("t")
+    val typeSearch = req.getParameter("t")
 
-    if(typeFetch == null){
+    if(typeSearch == null && (typeSearch != "p" || typeSearch != "u")){
       resp.sendError(HSResp.SC_BAD_REQUEST)
       error = true
     }
@@ -150,10 +178,10 @@ class SearchServlet extends HttpServlet{
       val query = req.getParameter("q")
       var json = ""
       if(query == null){
-        json = fetchDB(typeFetch,page,resp)
+        json = fetchDB(typeSearch,page,resp)
       }
       else{
-        json = fetchDB(typeFetch,query,page,resp)
+        json = fetchDB(typeSearch,query,page,resp)
       }
 
       if(json != null){

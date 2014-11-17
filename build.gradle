@@ -2,8 +2,7 @@ apply plugin: 'java'
 apply plugin: 'scala'
 apply plugin: 'war'
 apply plugin: 'jettyEclipse'
-apply plugin: 'eclipse'
-apply plugin: 'eclipse-wtp'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.7
 version = '1.0'
@@ -35,7 +34,7 @@ dependencies{
     compile 'org.json4s:json4s-ext_2.11:3.2.10'
     compile 'org.json4s:json4s-jackson_2.11:3.2.10'
     compile 'com.jolbox:bonecp:0.8.0.RELEASE'
-    providedCompile 'org.slf4j:slf4j-api:1.7.7'
+    runtime 'org.slf4j:slf4j-api:1.7.7'
 }
 
 task fetchData(type: JavaExec, dependsOn: classes) {

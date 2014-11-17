@@ -17,7 +17,7 @@ CREATE TABLE production(
   released VARCHAR(255) NOT NULL,
   runtime VARCHAR(255) NOT NULL,
   genre VARCHAR(255) NOT NULL,
-  diretor VARCHAR(255) NOT NULL,
+  director VARCHAR(255) NOT NULL,
   writer TEXT NOT NULL,
   actors VARCHAR(255) NOT NULL,
   plot TEXT NOT NULL,
