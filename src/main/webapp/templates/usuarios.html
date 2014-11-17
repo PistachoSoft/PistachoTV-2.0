@@ -26,26 +26,16 @@
                     <a href="http:\\www.pistachosoft.com">Back to PistachoSoft!</a>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <form name="login" method="post" action="servlet-de-login">
-
-                </form>
+            <ul class="nav navbar-nav navbar-right" ng-controller="LoginCtrl">
+                <li ng-hide="logged">
+                    <a href="#/registro">Iniciar sesión</a>
+                </li>
+                <li ng-show="logged">
+                    <a ng-click="logout()">Salir</a>
+                </li>
             </ul>
         </div>
-        <form ng-controller="MainCtrl" ng-submit="search()">
-            <!--<form class="padding-10-bot" name="browser" method="get" action="search">-->
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon">Search</span>
-                    <input id="searchInputQuery" type="text" class="form-control" value="" placeholder="something..." name="q" ng-model="q">
-                    <span class="input-group-addon">in</span>
-                    <select id="searchInputType" name="t" ng-model="t" class="form-control">
-                        <option value="p">Productions</option>
-                        <option value="u">Users</option>
-                    </select>
-                </div>
-            </div>
-        </form>
+        <searchBar></searchBar>
     </div>
 </div>
 
@@ -68,14 +58,4 @@
 </div>
 
 <!-- Footer -->
-<div id="footer" class="container">
-    <div class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container">
-            <div class="nav navbar-nav navbar-left">
-                <p class="text-muted" style="padding-top: 15px;">
-                    PistachoTV belongs to <a href="http://pistachosoft.com">PistachoSoft</a> domain.
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+<footer></footer>

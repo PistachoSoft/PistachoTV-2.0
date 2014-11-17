@@ -26,10 +26,13 @@
                     <a href="http:\\www.pistachosoft.com">Back to PistachoSoft!</a>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <form name="login" method="post" action="servlet-de-login">
-
-                </form>
+            <ul class="nav navbar-nav navbar-right" ng-controller="LoginCtrl">
+                <li ng-hide="logged">
+                    <a href="#/registro">Iniciar sesión</a>
+                </li>
+                <li ng-show="logged">
+                    <a ng-click="logout()">Salir</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -64,14 +67,4 @@
 </div>
 
 <!-- Footer -->
-<div id="footer" class="container">
-    <div class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container">
-            <div class="nav navbar-nav navbar-left">
-                <p class="text-muted" style="padding-top: 15px;">
-                    PistachoTV belongs to <a href="http://pistachosoft.com">PistachoSoft</a> domain.
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+<footer></footer>

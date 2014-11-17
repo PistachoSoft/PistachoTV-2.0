@@ -1,0 +1,14 @@
+<form ng-controller="MainCtrl" ng-submit="search()">
+    <!--<form class="padding-10-bot" name="browser" method="get" action="search">-->
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon">Search</span>
+            <input id="searchInputQuery" type="text" class="form-control" value="" placeholder="something..." name="q" ng-model="q">
+            <span class="input-group-addon">in</span>
+            <select id="searchInputType" name="t" ng-model="t" class="form-control">
+                <option value="p">Productions</option>
+                <option value="u">Users</option>
+            </select>
+        </div>
+    </div>
+</form>

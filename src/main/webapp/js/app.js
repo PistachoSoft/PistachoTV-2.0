@@ -19,6 +19,12 @@ angular.module('starter', ['ui.router'])
                 templateUrl: "templates/about.html"
             })
 
+            .state('registro', {
+                url: "/registro",
+                templateUrl: "templates/registro.html",
+                controller: "RegisterCtrl"
+            })
+
             .state('p', {
                 url: "/p/:_query",
                 templateUrl: "templates/producciones.html",
@@ -26,7 +32,7 @@ angular.module('starter', ['ui.router'])
             })
 
             .state('produccion', {
-                url: "/produccion/:_id",
+                url: "/p/id/:_id",
                 templateUrl: "templates/produccion.html",
                 controller: "ProductionCtrl"
             })
@@ -38,12 +44,27 @@ angular.module('starter', ['ui.router'])
             })
 
             .state('usuario', {
-                url: "/usuario/:_id",
+                url: "/u/id/:_id",
                 templateUrl: "templates/usuario.html",
                 controller: "UserCtrl"
             });
 
         $urlRouterProvider.otherwise('inicio')
+    })
+
+    .factory('Login', function(){
+        var fac = [];
+        var logged = false;
+
+        fac.get = function(){
+            return logged;
+        }
+
+        fac.set = function(value){
+            logged = value;
+        }
+
+        return fac;
     })
 
     .controller('MainCtrl', [ '$scope', '$state', function($scope, $state){
@@ -55,6 +76,37 @@ angular.module('starter', ['ui.router'])
             }else if(type==='u'){
                 $state.go('u', { _query: query});
             }
+        }
+    }])
+
+    .controller('LoginCtrl', ['$scope', '$http', 'Login', function($scope,$http,Login){
+        $scope.logged = Login.get;
+
+        $scope.logout = function(){
+            Login.set(false);
+        }
+    }])
+
+    .controller('RegisterCtrl', ['$scope', '$http', '$state', 'Login', function($scope,$http,$state,Login){
+
+        $scope.login = function () {
+            console.log($scope.loginuser);
+            console.log($scope.loginpassword);
+            Login.set(true);
+            $state.go('inicio');
+        }
+        
+        $scope.register = function () {
+            console.log($scope.name);
+            console.log($scope.lastname);
+            console.log($scope.birthday);
+            console.log($scope.address);
+            console.log($scope.phone);
+            console.log($scope.user);
+            console.log($scope.password);
+            console.log($scope.repassword);
+            Login.set(true);
+            $state.go('inicio');
         }
     }])
 
@@ -128,4 +180,18 @@ angular.module('starter', ['ui.router'])
             restrict: 'E',
             templateUrl: 'templates/userBigTemplate.html'
         };
+    })
+
+    .directive('footer', function(){
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/footer.html'
+        }
+    })
+
+    .directive('searchBar', function(){
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/searchBar.html'
+        }
     });

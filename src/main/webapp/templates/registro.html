@@ -1,0 +1,143 @@
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a href="#/inicio">PistachoTV</a>
+                </li>
+                <li>
+                    <a href="#/p/">Películas</a>
+                </li>
+                <li>
+                    <a href="#/u/">Usuarios</a>
+                </li>
+                <li>
+                    <a href="#/acerca">About</a>
+                </li>
+                <li>
+                    <a href="http:\\www.pistachosoft.com">Back to PistachoSoft!</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="active" href="#/registro">Iniciar sesión</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="page-header">
+                <h1>Inicio de sesión</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login o registro -->
+    <div class="row">
+
+        <!-- Login -->
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <form ng-submit="login()">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                        <input class="form-control" type="text" placeholder="Correo electrónico" ng-model="loginuser"/>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class=" glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input class="form-control" type="password" placeholder="Contraseña" ng-model="loginpassword">
+                    </div>
+                    <br>
+                    <button class="btn btn-block btn-success" type="submit">Entrar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Registro -->
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <form ng-submit="register()">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </span>
+                        <input class="form-control" type="text" placeholder="Nombre" ng-model="name"/>
+                        <input class="form-control" type="text" placeholder="Apellidos" ng-model="lastname"/>
+                    </div>
+                    <!--<br>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </span>
+                        <input class="form-control" type="text" placeholder="Apellidos" ng-model="lastname"/>
+                    </div>-->
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        <input class="form-control" type="date" placeholder="Año de nacimiento" ng-model="birthday"/>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </span>
+                        <input class="form-control" type="text" placeholder="Dirección" ng-model="address"/>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-phone"></span>
+                        </span>
+                        <input class="form-control" type="tel" placeholder="Teléfono" ng-model="phone"/>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </span>
+                        <input class="form-control" type="text" placeholder="Correo electrónico" ng-model="user"/>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class=" glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input class="form-control" type="password" placeholder="Contraseña" ng-model="password">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <span class=" glyphicon glyphicon-lock"></span>
+                        </span>
+                        <input class="form-control" type="password" placeholder="Reescriba la contraseña" ng-model="repassword">
+                    </div>
+                    <br>
+                    <button class="btn btn-block btn-success" type="submit">Ev</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer></footer>
