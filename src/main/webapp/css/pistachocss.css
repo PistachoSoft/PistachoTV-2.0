@@ -11,30 +11,12 @@ body {
 	float:none;
 }
 
-#footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	/* Set the fixed height of the footer here */
-	height: 65px;
-	background-color: #222;
-	padding-top: 15px;
-}
-
 .row {
 	text-align: center;
 }
 
 .myPanel {
 	padding-top: 100px;
-}
-
-.myIntro {
-	position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -(400/2)px;
-    margin-top: -(400/2)px;
 }
 
 .dropdown-menu .sub-menu {
