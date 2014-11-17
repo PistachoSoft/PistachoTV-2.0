@@ -49,22 +49,20 @@ angular.module('starter', ['ui.router'])
                 controller: "UserCtrl"
             });
 
-        $urlRouterProvider.otherwise('inicio')
+        $urlRouterProvider.otherwise('inicio');
     })
 
-    .factory('Login', function(){
-        var fac = [];
+    .service('Login', function(){
         var logged = false;
 
-        fac.get = function(){
-            return logged;
+        return {
+            getLoggedStatus: function(){
+                return logged;
+            },
+            setLoggedStatus: function(value){
+                logged = value;
+            }
         }
-
-        fac.set = function(value){
-            logged = value;
-        }
-
-        return fac;
     })
 
     .controller('MainCtrl', [ '$scope', '$state', function($scope, $state){
@@ -79,11 +77,12 @@ angular.module('starter', ['ui.router'])
         }
     }])
 
-    .controller('LoginCtrl', ['$scope', '$http', 'Login', function($scope,$http,Login){
-        $scope.logged = Login.get;
+    .controller('LoginCtrl', ['$scope', '$http', '$state', '$stateParams', 'Login', function($scope,$http,$state,$stateParams,Login){
+        $scope.logged = Login.getLoggedStatus();
 
         $scope.logout = function(){
-            Login.set(false);
+            Login.setLoggedStatus(false);
+            $state.go($state.current,$stateParams,{reload: true});
         }
     }])
 
@@ -92,7 +91,7 @@ angular.module('starter', ['ui.router'])
         $scope.login = function () {
             console.log($scope.loginuser);
             console.log($scope.loginpassword);
-            Login.set(true);
+            Login.setLoggedStatus(true);
             $state.go('inicio');
         }
         
@@ -105,7 +104,7 @@ angular.module('starter', ['ui.router'])
             console.log($scope.user);
             console.log($scope.password);
             console.log($scope.repassword);
-            Login.set(true);
+            Login.setLoggedStatus(true);
             $state.go('inicio');
         }
     }])
