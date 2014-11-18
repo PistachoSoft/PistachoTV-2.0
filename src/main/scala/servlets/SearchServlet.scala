@@ -86,7 +86,7 @@ class SearchServlet extends HttpServlet{
         dbQuery = "SELECT _id, title, year, image " +
                   "FROM production " +
                   "WHERE title LIKE ? " +
-                  "ORDER BY title DESC " +
+                  "ORDER BY title ASC " +
                   limitPage(page)
         executeQuery(dbQuery
           , (st: PreparedStatement) => {
@@ -99,7 +99,7 @@ class SearchServlet extends HttpServlet{
         dbQuery = "SELECT _id, name, surname, email " +
           "FROM user " +
           "WHERE email LIKE ? " +
-          "ORDER BY surname,name,email DESC " +
+          "ORDER BY surname,name,email ASC " +
           limitPage(page)
         executeQuery(dbQuery
           , (st: PreparedStatement) => {
@@ -124,7 +124,7 @@ class SearchServlet extends HttpServlet{
 
     typeSearch match {
       case "p" =>
-        dbQuery = "SELECT _id, title, year, image FROM production ORDER BY title DESC " +
+        dbQuery = "SELECT _id, title, year, image FROM production ORDER BY title ASC " +
                       limitPage(page)
 
         executeQuery(dbQuery
@@ -134,7 +134,7 @@ class SearchServlet extends HttpServlet{
       case "u" =>
         dbQuery = "SELECT _id, name, surname, email " +
           "FROM user " +
-          "ORDER BY surname,name,email DESC " +
+          "ORDER BY surname,name,email ASC " +
           limitPage(page)
 
         executeQuery(dbQuery
