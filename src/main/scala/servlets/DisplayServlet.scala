@@ -61,7 +61,7 @@ class DisplayServlet extends HttpServlet{
               , rs.getString(14))
           })
       case "u" =>
-        dbQuery = "Select * FROM production " +
+        dbQuery = "Select * FROM user " +
           "WHERE _id = " + i
         executeQuery(dbQuery
           , (rs: ResultSet) => {
@@ -72,7 +72,7 @@ class DisplayServlet extends HttpServlet{
               , rs.getString(5)
               , rs.getString(6)
               , rs.getInt(7)
-              , rs.getString(8))
+              , null)
           })
     }
   }
