@@ -60,6 +60,7 @@ class SearchServlet extends HttpServlet{
           }
         } catch {
           case exception: Exception =>
+            exception.printStackTrace()
         } finally {
           if (!connection.isClosed) connection.close()
         }
@@ -96,10 +97,10 @@ class SearchServlet extends HttpServlet{
           , (rs: ResultSet) => getMinProductionRS(rs)
         )
       case "u" =>
-        dbQuery = "SELECT _id, name, surname, email " +
+        dbQuery = "SELECT _id, name, surname, mail " +
           "FROM user " +
-          "WHERE email LIKE ? " +
-          "ORDER BY surname,name,email ASC " +
+          "WHERE mail LIKE ? AND mail != 'anon@not.needed' " +
+          "ORDER BY surname,name,mail ASC " +
           limitPage(page)
         executeQuery(dbQuery
           , (st: PreparedStatement) => {
@@ -132,9 +133,10 @@ class SearchServlet extends HttpServlet{
           , (rs: ResultSet) => getMinProductionRS(rs)
         )
       case "u" =>
-        dbQuery = "SELECT _id, name, surname, email " +
+        dbQuery = "SELECT _id, name, surname, mail " +
           "FROM user " +
-          "ORDER BY surname,name,email ASC " +
+          "WHERE mail != 'anon@not.needed' " +
+          "ORDER BY surname,name,mail ASC " +
           limitPage(page)
 
         executeQuery(dbQuery
