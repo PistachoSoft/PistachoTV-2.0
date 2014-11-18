@@ -37,7 +37,6 @@ class RegisterServlet extends HttpServlet{
           }
         } catch {
           case se: SQLException =>
-            se.printStackTrace()
             null
         }
       case None =>
