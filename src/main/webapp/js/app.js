@@ -98,10 +98,19 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
     .controller('RegisterCtrl', ['$scope', '$http', '$state', 'Login', function($scope,$http,$state,Login){
 
         $scope.login = function () {
-            console.log($scope.loginemail);
-            console.log($scope.loginpassword);
-            Login.setLoggedStatus(true);
-            $state.go('inicio');
+            var form_loginemail = $scope.loginemail;
+            var form_loginpassword =  $scope.loginpassword;
+
+            $http({
+                method: 'GET',
+                url: '/login?email='+form_loginemail+'&pass='+form_loginpassword
+            }).success(function(data,status){
+                if(status === 200){
+                    Login.setLoggedStatus(true);
+                    Login.setUser(data);
+                    $state.go('inicio');
+                }
+            });
         }
         
         $scope.register = function () {
