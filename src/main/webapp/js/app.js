@@ -54,6 +54,7 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
 
     .service('Login', function(){
         var logged = false;
+        var user = 'anon@not.need';
 
         return {
             getLoggedStatus: function(){
@@ -61,6 +62,12 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
             },
             setLoggedStatus: function(value){
                 logged = value;
+            },
+            getUser: function(){
+                return user;
+            },
+            setUser: function(value){
+                user = value;
             }
         }
     })
@@ -79,9 +86,11 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
 
     .controller('LoginCtrl', ['$scope', '$http', '$state', '$stateParams', 'Login', function($scope,$http,$state,$stateParams,Login){
         $scope.logged = Login.getLoggedStatus();
+        $scope.user = Login.getUser();
 
         $scope.logout = function(){
             Login.setLoggedStatus(false);
+            Login.setUser('anon@not.need');
             $state.go($state.current,$stateParams,{reload: true});
         }
     }])
@@ -89,23 +98,50 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
     .controller('RegisterCtrl', ['$scope', '$http', '$state', 'Login', function($scope,$http,$state,Login){
 
         $scope.login = function () {
-            console.log($scope.loginuser);
+            console.log($scope.loginemail);
             console.log($scope.loginpassword);
             Login.setLoggedStatus(true);
             $state.go('inicio');
         }
         
         $scope.register = function () {
-            console.log($scope.name);
-            console.log($scope.lastname);
-            console.log($scope.birthday);
-            console.log($scope.address);
-            console.log($scope.phone);
-            console.log($scope.user);
-            console.log($scope.password);
-            console.log($scope.repassword);
-            Login.setLoggedStatus(true);
-            $state.go('inicio');
+            var form_name = $scope.name;
+            var form_lastname = $scope.lastname;
+            var form_birthday = $scope.birthday;
+            var form_address = $scope.address;
+            var form_phone = $scope.phone;
+            var form_email = $scope.email;
+            var form_pass = $scope.password;
+            var form_repass = $scope.repassword;
+
+            if(form_name.trim() !== "" &&
+                form_lastname.trim() !== "" &&
+                form_email.indexOf('@') > -1 &&
+                form_phone.trim() !== "" &&
+                !isNaN(form_phone) &&
+                form_pass.trim() !== "" &&
+                form_pass === form_repass){
+                $http({
+                    method: 'POST',
+                    url: '/register',
+                    data: 'name=' + form_name+'&' +
+                            'lastname='+form_lastname+'&' +
+                            'birthday='+form_birthday+'&' +
+                            'address='+form_address+'&' +
+                            'phone='+form_phone+'&' +
+                            'email='+form_email+'&' +
+                            'password='+form_pass,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).success(function(data,status){
+                    if(status === 200) {
+                        Login.setLoggedStatus(true);
+                        Login.setUser(data);
+                        $state.go('inicio');
+                    }
+                });
+            }
         }
     }])
 

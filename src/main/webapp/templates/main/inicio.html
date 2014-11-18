@@ -31,6 +31,9 @@
                     <a href="#/registro">Iniciar sesión</a>
                 </li>
                 <li ng-show="logged">
+                    <p>Logged in as {{user}}</p>
+                </li>
+                <li ng-show="logged">
                     <a ng-click="logout()">Salir</a>
                 </li>
             </ul>

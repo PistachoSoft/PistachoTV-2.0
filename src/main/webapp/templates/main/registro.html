@@ -56,7 +56,7 @@
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-user"></span>
                         </span>
-                        <input class="form-control" type="text" placeholder="Correo electrónico" ng-model="loginuser"/>
+                        <input class="form-control" type="text" placeholder="Correo electrónico" ng-model="loginemail"/>
                     </div>
                     <br>
                     <div class="input-group">
@@ -79,50 +79,50 @@
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-user"></span>
                         </span>
-                        <input class="form-control" type="text" placeholder="Nombre" ng-model="name"/>
-                        <input class="form-control" type="text" placeholder="Apellidos" ng-model="lastname"/>
+                        <input class="form-control" type="text" placeholder="Nombre" ng-model="name" required/>
+                        <input class="form-control" type="text" placeholder="Apellidos" ng-model="lastname" required/>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
-                        <input class="form-control" type="date" placeholder="Año de nacimiento" ng-model="birthday"/>
+                        <input class="form-control" type="date" placeholder="Año de nacimiento" ng-model="birthday" required/>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-home"></span>
                         </span>
-                        <input class="form-control" type="text" placeholder="Dirección" ng-model="address"/>
+                        <input class="form-control" type="text" placeholder="Dirección" ng-model="address" required/>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-phone"></span>
                         </span>
-                        <input class="form-control" type="tel" placeholder="Teléfono" ng-model="phone"/>
+                        <input class="form-control" type="tel" placeholder="Teléfono" ng-model="phone" required/>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-envelope"></span>
                         </span>
-                        <input class="form-control" type="text" placeholder="Correo electrónico" ng-model="user"/>
+                        <input class="form-control" type="text" placeholder="Correo electrónico" ng-model="email" required/>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class=" glyphicon glyphicon-lock"></span>
                         </span>
-                        <input class="form-control" type="password" placeholder="Contraseña" ng-model="password">
+                        <input class="form-control" type="password" placeholder="Contraseña" ng-model="password" required>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class=" glyphicon glyphicon-lock"></span>
                         </span>
-                        <input class="form-control" type="password" placeholder="Reescriba la contraseña" ng-model="repassword">
+                        <input class="form-control" type="password" placeholder="Reescriba la contraseña" ng-model="repassword" required>
                     </div>
                     <br>
                     <button class="btn btn-block btn-success" type="submit">Enviar</button>
