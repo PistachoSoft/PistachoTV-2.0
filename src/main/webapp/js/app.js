@@ -125,7 +125,7 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
                     method: 'POST',
                     url: '/register',
                     data: 'name=' + form_name+'&' +
-                            'lastname='+form_lastname+'&' +
+                            'surname='+form_lastname+'&' +
                             'birthday='+form_birthday+'&' +
                             'address='+form_address+'&' +
                             'phone='+form_phone+'&' +
