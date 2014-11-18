@@ -237,4 +237,11 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
             restrict: 'E',
             templateUrl: 'templates/components/searchBar.html'
         }
+    })
+
+    .directive('navlogin', function(){
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/components/navlogin.html'
+        }
     });

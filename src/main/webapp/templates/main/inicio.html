@@ -26,17 +26,7 @@
                     <a href="http://www.pistachosoft.com">Back to PistachoSoft!</a>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right" ng-controller="LoginCtrl">
-                <li ng-hide="logged">
-                    <a href="#/registro">Iniciar sesión</a>
-                </li>
-                <li ng-show="logged">
-                    <p>Logged in as {{user}}</p>
-                </li>
-                <li ng-show="logged">
-                    <a ng-click="logout()">Salir</a>
-                </li>
-            </ul>
+            <navlogin></navlogin>
         </div>
     </div>
 </div>
