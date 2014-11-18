@@ -10,42 +10,42 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
 
             .state('inicio', {
                 url: "/inicio",
-                templateUrl: "templates/inicio.html",
+                templateUrl: "templates/main/inicio.html",
                 controller: "MainCtrl"
             })
 
             .state('about', {
                 url: "/acerca",
-                templateUrl: "templates/about.html"
+                templateUrl: "templates/main/about.html"
             })
 
             .state('registro', {
                 url: "/registro",
-                templateUrl: "templates/registro.html",
+                templateUrl: "templates/main/registro.html",
                 controller: "RegisterCtrl"
             })
 
             .state('p', {
                 url: "/p/:_query",
-                templateUrl: "templates/producciones.html",
+                templateUrl: "templates/main/producciones.html",
                 controller: "ProductionsCtrl"
             })
 
             .state('produccion', {
                 url: "/p/id/:_id",
-                templateUrl: "templates/produccion.html",
+                templateUrl: "templates/main/produccion.html",
                 controller: "ProductionCtrl"
             })
 
             .state('u', {
                 url: "/u/:_query",
-                templateUrl: "templates/usuarios.html",
+                templateUrl: "templates/main/usuarios.html",
                 controller: "UsersCtrl"
             })
 
             .state('usuario', {
                 url: "/u/id/:_id",
-                templateUrl: "templates/usuario.html",
+                templateUrl: "templates/main/usuario.html",
                 controller: "UserCtrl"
             });
 
@@ -164,41 +164,41 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
     .directive('producciones', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/movieTemplate.html'
+            templateUrl: 'templates/partials/movieTemplate.html'
         };
     })
 
     .directive('produccion', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/movieBigTemplate.html'
+            templateUrl: 'templates/partials/movieBigTemplate.html'
         };
     })
 
     .directive('usuarios', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/userTemplate.html'
+            templateUrl: 'templates/partials/userTemplate.html'
         };
     })
 
     .directive('usuario', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/userBigTemplate.html'
+            templateUrl: 'templates/partials/userBigTemplate.html'
         };
     })
 
     .directive('footer', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/footer.html'
+            templateUrl: 'templates/components/footer.html'
         }
     })
 
     .directive('searchbar', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/searchBar.html'
+            templateUrl: 'templates/components/searchBar.html'
         }
     });
