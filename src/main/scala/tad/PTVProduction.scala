@@ -1,6 +1,8 @@
 package tad
 
-class PTVProduction (  var _id: Int
+import model.Production
+
+class PTVProduction (  var _id: Long
                      , var title: String
                      , var year: Int
                      , var rated: String
@@ -13,7 +15,24 @@ class PTVProduction (  var _id: Int
                      , var plot: String
                      , var language: String
                      , var typeProd: String
-                     , var image: String) extends ReturnTrait{
+                     , var image: String){
+
+  def this(prod: Production) = {
+    this(prod._id.get
+    ,prod.title.get
+    ,prod.year.get
+    ,prod.rated.get
+    ,prod.released.get
+    ,prod.runtime.get
+    ,prod.genre.get
+    ,prod.director.get
+    ,prod.writer.get
+    ,prod.actors.get
+    ,prod.plot.get
+    ,prod.language.get
+    ,prod.typeProd.get
+    ,prod.image.get)
+  }
 
   def this(omdbproduction: OMDBProduction) = {
     this(0
@@ -30,6 +49,28 @@ class PTVProduction (  var _id: Int
         ,omdbproduction.Language
         ,omdbproduction.Type
         ,omdbproduction.Poster)
+  }
+
+  def getRawProductionMapped = {
+    val prod = Production.create
+
+    println(this)
+
+    prod.title(title)
+        .year(year)
+        .rated(rated)
+        .released(released)
+        .runtime(runtime)
+        .genre(genre)
+        .director(director)
+        .writer(writer)
+        .actors(actors)
+        .plot(plot)
+        .language(language)
+        .typeProd(typeProd)
+        .image(image)
+
+    prod
   }
 
 }

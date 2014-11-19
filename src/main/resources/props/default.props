@@ -1,0 +1,4 @@
+db.driver=com.mysql.jdbc.Driver
+db.url=jdbc:mysql://localhost/pistachotv
+db.user=pistachoroot
+db.pass=toor

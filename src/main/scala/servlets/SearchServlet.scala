@@ -1,76 +1,22 @@
 package servlets
 
-import java.sql.{PreparedStatement, ResultSet}
-import javax.servlet.http.{HttpServletRequest => HSReq, HttpServletResponse => HSResp, HttpServlet}
 import javax.servlet.annotation.WebServlet
+import javax.servlet.http.{HttpServlet, HttpServletRequest => HSReq, HttpServletResponse => HSResp}
 
-import org.json4s.jackson.Serialization.{write => writeJson}
-import org.json4s.DefaultFormats
-import tad.{PTVUserMin, ReturnTrait, PTVProductionMin}
-
-import scala.collection.mutable
+import model.{Production, User}
+import net.liftweb.json.Serialization.write
+import net.liftweb.mapper._
 
 
 @WebServlet(urlPatterns = Array("/search"))
 class SearchServlet extends HttpServlet{
 
   // json formats
-  implicit val formats = DefaultFormats
+  implicit val formats = net.liftweb.json.DefaultFormats
 
-  val itemsPage = 20
+  val itemsPerPage = 20
 
-  /**
-   * Generates de SQL for the LIMIT condition
-   * @param page page number
-   * @return
-   */
-  private def limitPage(page: Int) = {
-    "LIMIT " + ((page-1)*itemsPage) + "," + (page*itemsPage)
-  }
-
-  /**
-   * Generates a PTVProductionMin from the ResultSet row
-   * @param rs the result set
-   * @return
-   */
-  private def getMinProductionRS(rs: ResultSet) = {
-    new PTVProductionMin(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4))
-  }
-
-  private def getMinUserRS(rs: ResultSet) = {
-    new PTVUserMin(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4))
-  }
-
-  /**
-   * Executes a mysql query
-   * @param query a mysql query
-   * @param getRS a function that given a PreparedStatement generated from the query returns a ResultSet
-   * @return the query result as a json
-   */
-  private def executeQuery(query: String
-                           , getRS: (PreparedStatement) => ResultSet
-                           , getData: (ResultSet) => ReturnTrait) = {
-    var list = mutable.MutableList[ReturnTrait]()
-    ConnectionPool.getConnection match{
-      case Some(connection) =>
-        try {
-          val rs = getRS(connection.prepareStatement(query))
-          while(rs.next()){
-            list += getData(rs)
-          }
-        } catch {
-          case exception: Exception =>
-            exception.printStackTrace()
-        } finally {
-          if (!connection.isClosed) connection.close()
-        }
-      case None =>
-        println("Not getting connection from connection pooling")
-    }
-
-    writeJson(list)
-  }
-
+  def getStartAt(page: Int) = page*itemsPerPage - 1
   /**
    * Based on it's parameters, performs a search in the database return the result as json
    * @param typeSearch type search
@@ -80,35 +26,29 @@ class SearchServlet extends HttpServlet{
    * @return
    */
   private def fetchDB(typeSearch: String, query: String, page: Int, resp: HSResp) = {
-    var dbQuery = ""
-
     typeSearch match {
       case "p" =>
-        dbQuery = "SELECT _id, title, year, image " +
-                  "FROM production " +
-                  "WHERE title LIKE ? " +
-                  "ORDER BY title ASC " +
-                  limitPage(page)
-        executeQuery(dbQuery
-          , (st: PreparedStatement) => {
-            st.setString(1, "%" + query + "%")
-            st.executeQuery()
-          }
-          , (rs: ResultSet) => getMinProductionRS(rs)
-        )
+        val prodList = Production.findAllFields(
+          Seq(Production._id,Production.title,Production.year,Production.image)
+        , OrderBy(Production.title,Ascending)
+        , Like(Production.title,"%" + query + "%")
+        , MaxRows(itemsPerPage)
+        , StartAt(getStartAt(page)))
+
+        write(prodList.map(x => x.asPTVProductionMin))
+
       case "u" =>
-        dbQuery = "SELECT _id, name, surname, mail " +
-          "FROM user " +
-          "WHERE mail LIKE ? AND mail != 'anon@not.needed' " +
-          "ORDER BY surname,name,mail ASC " +
-          limitPage(page)
-        executeQuery(dbQuery
-          , (st: PreparedStatement) => {
-            st.setString(1,"%" + query + "%")
-            st.executeQuery()
-          }
-          , (rs: ResultSet) => getMinUserRS(rs)
+        val userList = User.findAllFields(
+          Seq(User._id, User.name, User.surname, User.email)
+          , Like(User.email, "%" + query + "%")
+          , OrderBy(User.surname,Ascending)
+          , OrderBy(User.name,Ascending)
+          , OrderBy(User.email,Ascending)
+          , MaxRows(itemsPerPage)
+          , StartAt(getStartAt(page))
         )
+
+        write(userList.map(x => x.asPTVUserMin))
     }
   }
 
@@ -125,27 +65,25 @@ class SearchServlet extends HttpServlet{
 
     typeSearch match {
       case "p" =>
-        dbQuery = "SELECT _id, title, year, image FROM production ORDER BY title ASC " +
-                      limitPage(page)
+        val prodList = Production.findAllFields(
+          Seq(Production._id,Production.title,Production.year,Production.image)
+          , OrderBy(Production.title,Ascending)
+          , MaxRows(itemsPerPage)
+          , StartAt(getStartAt(page)))
 
-        executeQuery(dbQuery
-          , (st: PreparedStatement) => st.executeQuery()
-          , (rs: ResultSet) => getMinProductionRS(rs)
-        )
+        write(prodList.map(x => x.asPTVProductionMin))
+
       case "u" =>
-        dbQuery = "SELECT _id, name, surname, mail " +
-          "FROM user " +
-          "WHERE mail != 'anon@not.needed' " +
-          "ORDER BY surname,name,mail ASC " +
-          limitPage(page)
+        val userList = User.findAllFields(
+          Seq(User._id, User.name, User.surname, User.email)
+          , OrderBy(User.surname,Ascending)
+          , OrderBy(User.name,Ascending)
+          , OrderBy(User.email,Ascending)
+          , MaxRows(itemsPerPage)
+          , StartAt(getStartAt(page)))
 
-        executeQuery(dbQuery
-          , (st: PreparedStatement) => st.executeQuery()
-          , (rs: ResultSet) => getMinUserRS(rs)
-        )
+        write(userList.map(x => x.asPTVUserMin))
     }
-
-
   }
 
   override def doGet(req: HSReq, resp: HSResp) = {

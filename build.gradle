@@ -7,6 +7,12 @@ apply plugin: 'idea'
 sourceCompatibility = 1.7
 version = '1.0'
 
+ext{
+    scalaVersion = '2.11'
+    scalaMinor = '4'
+    liftVersion = '3.0-M2'
+}
+
 repositories {
     mavenCentral()
 }
@@ -22,14 +28,21 @@ buildscript {
 }
 dependencies {
     providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
-    compile 'mysql:mysql-connector-java:5.1.33'
     compile 'commons-httpclient:commons-httpclient:3.1'
+
+    compile "org.scala-lang:scala-library-all:$scalaVersion.$scalaMinor",
+            "net.liftweb:lift-mapper_$scalaVersion:$liftVersion",
+            "net.liftweb:lift-webkit_$scalaVersion:$liftVersion",
+            "net.liftweb:lift-util_$scalaVersion:$liftVersion",
+            "net.liftweb:lift-actor_$scalaVersion:$liftVersion",
+            "net.liftweb:lift-common_$scalaVersion:$liftVersion",
+            "net.liftweb:lift-json_$scalaVersion:$liftVersion",
+            'mysql:mysql-connector-java:5.1.33'
 }
 
 // Scala dependencies
 
 dependencies{
-    compile 'org.scala-lang:scala-library-all:2.11.2'
     compile 'org.spark-project.akka:akka-actor_2.11:2.3.4-spark'
     compile 'org.json4s:json4s-ext_2.11:3.2.10'
     compile 'org.json4s:json4s-jackson_2.11:3.2.10'

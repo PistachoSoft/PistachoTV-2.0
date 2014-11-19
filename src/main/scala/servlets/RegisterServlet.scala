@@ -4,6 +4,7 @@ import java.sql.SQLException
 import javax.servlet.annotation.WebServlet
 import javax.servlet.http.{HttpServletRequest => HSReq, HttpServletResponse => HSResp, HttpServlet}
 
+import model.User
 import org.json4s.jackson.Serialization.{write => writeJson}
 import org.json4s.DefaultFormats
 import tad.PTVUser
@@ -15,32 +16,26 @@ class RegisterServlet extends HttpServlet{
   implicit val formats = DefaultFormats
 
   def registerUser(name: String, surname: String, birthday: String, address: String, email: String
-                   , password: String, phone: Int): String = {
-    ConnectionPool.getConnection match {
-      case Some(connection) =>
-        try{
-          val st = connection.prepareStatement("INSERT INTO user " +
-            "(name,surname,birthday,address,mail,phone,password) " +
-            " VALUES(?,?,?,?,?,?,?)")
-          st.setString(1,name)
-          st.setString(2,surname)
-          st.setString(3,birthday)
-          st.setString(4,address)
-          st.setString(5,email)
-          st.setInt(6,phone)
-          st.setString(7,password)
-          val rst = st.executeUpdate()
-          if(rst > 0){
-            email
-          } else{
-            null
-          }
-        } catch {
-          case se: SQLException =>
-            null
-        }
-      case None =>
-        println("Not getting connection from connection pooling")
+                   , password: String, phone: Int) = {
+    val user = User.create
+    user.name(name)
+    user.surname(surname)
+    user.birthday(birthday)
+    user.address(address)
+    user.email(email)
+    user.phone(phone)
+    user.password(password)
+
+    try{
+      if(user.save()){
+        email
+      }
+      else{
+        null
+      }
+    }
+    catch{
+      case e: Exception =>
         null
     }
   }

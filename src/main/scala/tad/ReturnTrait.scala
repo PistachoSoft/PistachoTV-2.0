@@ -1,3 +1,0 @@
-package tad
-
-trait ReturnTrait
