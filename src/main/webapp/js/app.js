@@ -55,6 +55,7 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
     .service('Login', function(){
         var logged = false;
         var user = 'anon@not.need';
+        var pass = '';
 
         return {
             getLoggedStatus: function(){
@@ -68,6 +69,12 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
             },
             setUser: function(value){
                 user = value;
+            },
+            getPass: function() {
+                return pass;
+            },
+            setPass: function(value){
+                pass = value;
             }
         }
     })
@@ -91,29 +98,41 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
         $scope.logout = function(){
             Login.setLoggedStatus(false);
             Login.setUser('anon@not.need');
+            Login.setPass('');
             $state.go($state.current,$stateParams,{reload: true});
         }
     }])
 
     .controller('RegisterCtrl', ['$scope', '$http', '$state', 'Login', function($scope,$http,$state,Login){
+        $scope.hideSpinner = true;
 
         $scope.login = function () {
+            $scope.hideSpinner = false;
             var form_loginemail = $scope.loginemail;
             var form_loginpassword =  $scope.loginpassword;
 
             $http({
                 method: 'GET',
-                url: '/login?email='+form_loginemail+'&pass='+form_loginpassword
+                url: '/login?email='+form_loginemail+'&pass='+CryptoJS.SHA256(form_loginpassword)
             }).success(function(data,status){
                 if(status === 200){
                     Login.setLoggedStatus(true);
                     Login.setUser(data);
+                    Login.setPass(CryptoJS.SHA256(form_loginpassword));
+                    $scope.hideSpinner = true;
                     $state.go('inicio');
+                }else{
+                    $scope.hideSpinner = true;
+                    alert('Revise sus datos');
                 }
+            }).error(function(data,status){
+                $scope.hideSpinner = true;
+                alert('Revise sus datos');
             });
         }
         
         $scope.register = function () {
+            $scope.hideSpinner = false;
             var form_name = $scope.name;
             var form_lastname = $scope.lastname;
             var form_birthday = $scope.birthday;
@@ -139,7 +158,7 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
                             'address='+form_address+'&' +
                             'phone='+form_phone+'&' +
                             'email='+form_email+'&' +
-                            'password='+form_pass,
+                            'password='+CryptoJS.SHA256(form_pass),
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
@@ -147,9 +166,21 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
                     if(status === 200) {
                         Login.setLoggedStatus(true);
                         Login.setUser(data);
+                        Login.setPass(CryptoJS.SHA256(form_pass));
+                        $scope.hideSpinner = true;
                         $state.go('inicio');
+
+                    }else{
+                        $scope.hideSpinner = true;
+                        alert('Revise sus datos');
                     }
+                }).error(function(data,status){
+                    $scope.hideSpinner = true;
+                    alert('Revise sus datos');
                 });
+            }else{
+                $scope.hideSpinner = true;
+                alert('Revise sus datos');
             }
         }
     }])
