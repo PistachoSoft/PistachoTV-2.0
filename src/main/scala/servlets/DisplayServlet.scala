@@ -60,7 +60,7 @@ class DisplayServlet extends HttpServlet{
 //          })
         User.findByKey(i) match {
           case Full(user) =>
-            write(user.asPTVUser)
+            write(user.password(null).asPTVUser)
           case _ =>
             null
         }
