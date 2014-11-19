@@ -16,27 +16,6 @@ class DisplayServlet extends HttpServlet{
   def fetchDB(typeSearch: String, i: Long) = {
     typeSearch match {
       case "p" =>
-//        dbQuery = "Select * FROM production " +
-//          "WHERE _id = " + i
-//
-//        executeQuery(dbQuery
-//        , (rs: ResultSet) => {
-//            new PTVProduction(rs.getInt(1)
-//              , rs.getString(2)
-//              , rs.getInt(3)
-//              , rs.getString(4)
-//              , rs.getString(5)
-//              , rs.getString(6)
-//              , rs.getString(7)
-//              , rs.getString(8)
-//              , rs.getString(9)
-//              , rs.getString(10)
-//              , rs.getString(11)
-//              , rs.getString(12)
-//              , rs.getString(13)
-//              , rs.getString(14))
-//          })
-
         Production.findByKey(i) match {
           case Full(prod) =>
             write(prod.asPTVProduction)
@@ -45,19 +24,6 @@ class DisplayServlet extends HttpServlet{
         }
 
       case "u" =>
-//        dbQuery = "Select * FROM user " +
-//          "WHERE _id = " + i
-//        executeQuery(dbQuery
-//          , (rs: ResultSet) => {
-//            new PTVUser(rs.getLong(1)
-//              , rs.getString(2)
-//              , rs.getString(3)
-//              , rs.getString(4)
-//              , rs.getString(5)
-//              , rs.getString(6)
-//              , rs.getInt(7)
-//              , null)
-//          })
         User.findByKey(i) match {
           case Full(user) =>
             write(user.password(null).asPTVUser)

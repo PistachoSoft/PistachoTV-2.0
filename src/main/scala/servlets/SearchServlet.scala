@@ -16,16 +16,15 @@ class SearchServlet extends HttpServlet{
 
   val itemsPerPage = 20
 
-  def getStartAt(page: Int) = page*itemsPerPage - 1
+  def getStartAt(page: Int) = (page-1)*itemsPerPage
   /**
    * Based on it's parameters, performs a search in the database return the result as json
    * @param typeSearch type search
    * @param query the query
    * @param page the page number
-   * @param resp HSResp in case of error
    * @return
    */
-  private def fetchDB(typeSearch: String, query: String, page: Int, resp: HSResp) = {
+  private def fetchDB(typeSearch: String, query: String, page: Int) = {
     typeSearch match {
       case "p" =>
         val prodList = Production.findAllFields(
@@ -57,12 +56,9 @@ class SearchServlet extends HttpServlet{
    * Based on it's parameters, performs a search in the database return the result as json
    * @param typeSearch type search
    * @param page the page number
-   * @param resp HSResp in case of error
    * @return
    */
-  private def fetchDB(typeSearch: String, page: Int, resp: HSResp): String = {
-    var dbQuery = ""
-
+  private def fetchDB(typeSearch: String, page: Int): String = {
     typeSearch match {
       case "p" =>
         val prodList = Production.findAllFields(
@@ -118,10 +114,10 @@ class SearchServlet extends HttpServlet{
       val query = req.getParameter("q")
       var json = ""
       if(query == null){
-        json = fetchDB(typeSearch,page,resp)
+        json = fetchDB(typeSearch,page)
       }
       else{
-        json = fetchDB(typeSearch,query,page,resp)
+        json = fetchDB(typeSearch,query,page)
       }
 
       if(json != null){

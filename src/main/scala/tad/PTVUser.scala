@@ -1,7 +1,5 @@
 package tad
 
-import java.util.Date
-
 import model.User
 
 class PTVUser ( var _id: Long
