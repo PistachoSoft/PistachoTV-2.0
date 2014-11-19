@@ -96,10 +96,13 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
         $scope.user = Login.getUser();
 
         $scope.logout = function(){
-            Login.setLoggedStatus(false);
-            Login.setUser('anon@not.need');
-            Login.setPass('');
-            $state.go($state.current,$stateParams,{reload: true});
+            var r = confirm('¿Quiere salir de su sesión?');
+            if(r === true){
+                Login.setLoggedStatus(false);
+                Login.setUser('anon@not.need');
+                Login.setPass('');
+                $state.go($state.current,$stateParams,{reload: true});
+            }
         }
     }])
 
