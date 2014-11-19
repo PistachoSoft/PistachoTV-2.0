@@ -12,7 +12,7 @@ class InitContextListener extends ServletContextListener{
 
   override def contextInitialized(sce: ServletContextEvent): Unit = {
     val boot = new Boot
-    boot.boot
+    boot.boot()
 
     if(Production.count == 0){
       println("No data found, dumping raw data")

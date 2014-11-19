@@ -1,19 +1,12 @@
 package servlets
 
-import java.sql.SQLException
 import javax.servlet.annotation.WebServlet
-import javax.servlet.http.{HttpServletRequest => HSReq, HttpServletResponse => HSResp, HttpServlet}
+import javax.servlet.http.{HttpServlet, HttpServletRequest => HSReq, HttpServletResponse => HSResp}
 
 import model.User
-import org.json4s.jackson.Serialization.{write => writeJson}
-import org.json4s.DefaultFormats
-import tad.PTVUser
 
 @WebServlet(urlPatterns = Array("/register"))
 class RegisterServlet extends HttpServlet{
-
-  // json formats
-  implicit val formats = DefaultFormats
 
   def registerUser(name: String, surname: String, birthday: String, address: String, email: String
                    , password: String, phone: Int) = {
@@ -42,12 +35,12 @@ class RegisterServlet extends HttpServlet{
 
   override def doPost(req: HSReq, resp: HSResp) = {
     var error = false
-    var name = req.getParameter("name")
-    var surname = req.getParameter("surname")
-    var birthday = req.getParameter("birthday")
-    var address = req.getParameter("address")
-    var email = req.getParameter("email")
-    var password = req.getParameter("password")
+    val name = req.getParameter("name")
+    val surname = req.getParameter("surname")
+    val birthday = req.getParameter("birthday")
+    val address = req.getParameter("address")
+    val email = req.getParameter("email")
+    val password = req.getParameter("password")
     var phone = 0
 
     error = name == null || surname == null || birthday == null || address == null ||
