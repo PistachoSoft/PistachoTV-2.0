@@ -1,23 +1,21 @@
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsable">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <a class="navbar-brand" href="#/inicio">PistachoTV</a>
         </div>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="collapsable">
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a href="#/inicio">PistachoTV</a>
+                    <a href="#/p/">Productions</a>
                 </li>
                 <li>
-                    <a href="#/p/">Películas</a>
-                </li>
-                <li>
-                    <a href="#/u/">Usuarios</a>
+                    <a href="#/u/">Users</a>
                 </li>
                 <li>
                     <a href="#/acerca">About</a>
@@ -40,7 +38,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="page-header">
-                <h1>Inicio de sesión</h1>
+                <h1>Log in</h1>
             </div>
         </div>
     </div>
@@ -57,17 +55,17 @@
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-user"></span>
                         </span>
-                        <input class="form-control" type="text" placeholder="Correo electrónico" ng-model="loginemail"/>
+                        <input class="form-control" type="text" placeholder="Email" ng-model="loginemail"/>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class=" glyphicon glyphicon-lock"></span>
                         </span>
-                        <input class="form-control" type="password" placeholder="Contraseña" ng-model="loginpassword">
+                        <input class="form-control" type="password" placeholder="Password" ng-model="loginpassword">
                     </div>
                     <br>
-                    <button class="btn btn-block btn-success" type="submit">Entrar</button>
+                    <button class="btn btn-block btn-success" type="submit">Login</button>
                 </form>
             </div>
         </div>
@@ -80,53 +78,53 @@
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-user"></span>
                         </span>
-                        <input class="form-control" type="text" placeholder="Nombre" ng-model="name" required/>
-                        <input class="form-control" type="text" placeholder="Apellidos" ng-model="lastname" required/>
+                        <input class="form-control" type="text" placeholder="Name" ng-model="name" required/>
+                        <input class="form-control" type="text" placeholder="Surname" ng-model="lastname" required/>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
-                        <input class="form-control" type="date" placeholder="Año de nacimiento" ng-model="birthday" required/>
+                        <input class="form-control" type="date" placeholder="Birthdate" ng-model="birthday" required/>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-home"></span>
                         </span>
-                        <input class="form-control" type="text" placeholder="Dirección" ng-model="address" required/>
+                        <input class="form-control" type="text" placeholder="Address" ng-model="address" required/>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-phone"></span>
                         </span>
-                        <input class="form-control" type="tel" placeholder="Teléfono" ng-model="phone" required/>
+                        <input class="form-control" type="tel" placeholder="Phone number" ng-model="phone" required/>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-envelope"></span>
                         </span>
-                        <input class="form-control" type="text" placeholder="Correo electrónico" ng-model="email" required/>
+                        <input class="form-control" type="text" placeholder="Email" ng-model="email" required/>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class=" glyphicon glyphicon-lock"></span>
                         </span>
-                        <input class="form-control" type="password" placeholder="Contraseña" ng-model="password" required>
+                        <input class="form-control" type="password" placeholder="Password" ng-model="password" required>
                     </div>
                     <br>
                     <div class="input-group">
                         <span class="input-group-addon">
                             <span class=" glyphicon glyphicon-lock"></span>
                         </span>
-                        <input class="form-control" type="password" placeholder="Reescriba la contraseña" ng-model="repassword" required>
+                        <input class="form-control" type="password" placeholder="Repeat password" ng-model="repassword" required>
                     </div>
                     <br>
-                    <button class="btn btn-block btn-success" type="submit">Enviar</button>
+                    <button class="btn btn-block btn-success" type="submit">Send</button>
                 </form>
             </div>
         </div>
