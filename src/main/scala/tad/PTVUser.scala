@@ -1,6 +1,7 @@
 package tad
 
-import model.User
+import model.{Comment, User}
+import net.liftweb.mapper.By
 
 class PTVUser ( var _id: Long
               , var name: String
@@ -9,7 +10,8 @@ class PTVUser ( var _id: Long
               , var address: String
               , var email: String
               , var phone: Int
-              , var password: String){
+              , var password: String
+              , var comments: List[PTVComment]){
 
   def this(user: User) = {
     this(user._id.get
@@ -19,6 +21,8 @@ class PTVUser ( var _id: Long
       , user.address.get
       , user.email.get
       , user.phone.get
-      , user.password.get)
+      , user.password.get
+      , Comment.findAll(By(Comment.idUser,user._id.get))
+               .map(x => new PTVComment(x)))
   }
 }

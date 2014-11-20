@@ -1,6 +1,7 @@
 package tad
 
-import model.Production
+import model.{Comment, Production}
+import net.liftweb.mapper.By
 
 class PTVProduction (  var _id: Long
                      , var title: String
@@ -15,7 +16,9 @@ class PTVProduction (  var _id: Long
                      , var plot: String
                      , var language: String
                      , var typeProd: String
-                     , var image: String){
+                     , var image: String
+                     , var comments: List[PTVComment]){
+
 
   def this(prod: Production) = {
     this(prod._id.get
@@ -31,7 +34,9 @@ class PTVProduction (  var _id: Long
     ,prod.plot.get
     ,prod.language.get
     ,prod.typeProd.get
-    ,prod.image.get)
+    ,prod.image.get
+    ,Comment.findAll(By(Comment.idProd,prod._id.get))
+            .map(x => new PTVComment(x)))
   }
 
   def this(omdbproduction: OMDBProduction) = {
@@ -48,7 +53,8 @@ class PTVProduction (  var _id: Long
         ,omdbproduction.Plot
         ,omdbproduction.Language
         ,omdbproduction.Type
-        ,omdbproduction.Poster)
+        ,omdbproduction.Poster
+        ,null)
   }
 
   def getRawProductionMapped = {

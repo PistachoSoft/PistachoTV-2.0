@@ -30,7 +30,9 @@ class CommentServlet extends HttpServlet{
     } else {
       Comment.findByKey(id) match {
         case Full(comment) =>
-          if(! comment.delete_!) HSResp.SC_BAD_REQUEST
+          if(! comment.delete_!) {
+            resp.sendError(HSResp.SC_BAD_REQUEST)
+          }
         case _ =>
           resp.sendError(HSResp.SC_BAD_REQUEST)
       }
