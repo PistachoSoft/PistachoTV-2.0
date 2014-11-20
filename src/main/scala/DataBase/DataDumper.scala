@@ -1,5 +1,6 @@
 package DataBase
 
+import model.User
 import org.json4s.DefaultFormats
 import org.json4s.jackson.Serialization.{read => readJson}
 import tad.PTVProduction
@@ -17,8 +18,17 @@ object DataDumper {
                     )
 
     for(prod <- productionList) {
+      println(prod)
       prod.getRawProductionMapped.save()
     }
+
+    val anon = User.create
+
+    anon.email("anon@not.need")
+    anon.password("I got no password")
+
+    anon.save()
+
   }
 
 }

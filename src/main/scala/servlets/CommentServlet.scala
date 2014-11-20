@@ -30,7 +30,7 @@ class CommentServlet extends HttpServlet{
     } else {
       Comment.findByKey(id) match {
         case Full(comment) =>
-          if(! comment.delete_!) {
+          if(comment._id == 1 && ! comment.delete_!) {
             resp.sendError(HSResp.SC_BAD_REQUEST)
           }
         case _ =>
@@ -82,7 +82,7 @@ class CommentServlet extends HttpServlet{
     User.find(Like(User.email,userEmail)) match {
       case Full(user) =>
         comment.idUser(user._id.get)
-        if(comment.save()){
+        if(comment.idUser != 1 && comment.save()){
           comment.asPTVComment()
         } else { null }
       case _ =>

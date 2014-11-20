@@ -60,8 +60,6 @@ class PTVProduction (  var _id: Long
   def getRawProductionMapped = {
     val prod = Production.create
 
-    println(this)
-
     prod.title(title)
         .year(year)
         .rated(rated)
