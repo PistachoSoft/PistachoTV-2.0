@@ -126,6 +126,7 @@ class CommentServlet extends HttpServlet{
       case Full(comment) =>
         comment.text(text)
         comment.title(title)
+        comment.modified_date(new Date)
         comment.save()
       case _ =>
     }
