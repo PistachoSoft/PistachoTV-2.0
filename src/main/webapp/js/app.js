@@ -1,4 +1,4 @@
-angular.module('starter', ['ui.router', 'angularSpinner'])
+angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
 
     .config(function($stateProvider, $urlRouterProvider){
         $stateProvider
@@ -203,12 +203,23 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
     .controller('ProductionsCtrl', ['$scope', '$http', '$stateParams', function($scope,$http,$stateParams){
         $scope.movies = [ ];
         $scope.hideSpinner = false;
+        $scope.currentPage = 1;
 
-        $http({ method: 'GET', url: '/search?t=p&q='+$stateParams._query+'&p=1' }).success(function(data){
+        $http({ method: 'GET', url: '/search?t=p&q='+$stateParams._query+'&p='+$scope.currentPage }).success(function(data){
             $scope.hideSpinner = true;
             $scope.movies = data;
             console.log(data);
         });
+
+        $scope.loadMoreProductions = function() {
+            $scope.currentPage += 1;
+            $http({ method: 'GET', url: '/search?t=p&q='+$stateParams._query+'&p='+$scope.currentPage }).success(function(data){
+                for(var i = 0; i < data.length; i++) {
+                    $scope.movies.push(data[i])
+                }
+                console.log(data);
+            });
+        }
     }])
 
     .controller('ProductionCtrl', ['$scope', '$http', '$state', '$stateParams', 'Login', function($scope,$http,$state,$stateParams,Login) {
@@ -301,13 +312,23 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
     .controller('UsersCtrl', ['$scope', '$http', '$stateParams', function($scope,$http,$stateParams){
         $scope.users = [ ];
         $scope.hideSpinner = false;
+        $scope.currentPage = 0;
 
-        $http({ method: 'GET', url: '/search?t=u&q='+$stateParams._query+'&p=1' }).success(function(data){
+        $http({ method: 'GET', url: '/search?t=u&q='+$stateParams._query+'&p=1'+$scope.currentPage }).success(function(data){
             $scope.hideSpinner = true;
             $scope.users = data;
             console.log(data);
         });
 
+        $scope.loadMoreUsers = function() {
+            $scope.currentPage += 1;
+            $http({ method: 'GET', url: '/search?t=u&q='+$stateParams._query+'&p='+$scope.currentPage }).success(function(data){
+                for(var i = 0; i < data.length; i++) {
+                    $scope.users.push(data[i])
+                }
+                console.log(data);
+            });
+        }
     }])
 
     .controller('UserCtrl', ['$scope', '$http', '$state', '$stateParams', 'Login', function($scope,$http,$state,$stateParams,Login) {

@@ -37,8 +37,8 @@
 			<br>
 			<div>
                 <span us-spinner ng-hide="hideSpinner"></span>
-				<ul class="rig" >
-					<li class="hoverable-item" style="height: 350px" ng-repeat="movie in movies | limitTo:20 | orderBy:'+title'">
+				<ul class="rig"  infinite-scroll='loadMoreProductions()' infinite-scroll-distance='1'>
+					<li class="hoverable-item" style="height: 350px" ng-repeat="movie in movies">
 						<producciones></producciones>
 					</li>
 				</ul>

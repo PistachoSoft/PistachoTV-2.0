@@ -37,7 +37,7 @@
 			<br>
 			<div>
                 <span us-spinner ng-hide="hideSpinner"></span>
-				<ul class="list-group">
+				<ul class="list-group" infinite-scroll='loadMoreUsers()' infinite-scroll-distance='1'>
 					<li class="list-group-item hoverable-item" ng-repeat="user in users | limitTo:20 | orderBy:'+name'">
 						<usuarios></usuarios>
 					</li>
