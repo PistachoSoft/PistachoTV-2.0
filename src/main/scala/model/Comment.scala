@@ -18,7 +18,7 @@ class Comment extends LongKeyedMapper[Comment]{
   object creation_date extends MappedDateTime(this)
   object modified_date extends MappedDateTime(this)
 
-  def asPTVComment() = new PTVComment(this)
+  def asPTVComment = new PTVComment(this)
 }
 object Comment extends Comment with LongKeyedMetaMapper[Comment]{
 

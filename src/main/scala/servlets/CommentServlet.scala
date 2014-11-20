@@ -25,12 +25,14 @@ class CommentServlet extends HttpServlet{
       case e: Exception => error = true;
     }
 
+    error |= id == 1
+
     if(error) {
       resp.sendError(HSResp.SC_BAD_REQUEST)
     } else {
       Comment.findByKey(id) match {
         case Full(comment) =>
-          if(comment._id == 1 && ! comment.delete_!) {
+          if(! comment.delete_!) {
             resp.sendError(HSResp.SC_BAD_REQUEST)
           }
         case _ =>
@@ -41,7 +43,8 @@ class CommentServlet extends HttpServlet{
 
   def getComment(id: Long) = {
     Comment.findByKey(id) match {
-      case Full(comment) => write(comment)
+      case Full(comment) =>
+        write(comment.asPTVComment)
       case _ => null
     }
   }
@@ -82,8 +85,8 @@ class CommentServlet extends HttpServlet{
     User.find(Like(User.email,userEmail)) match {
       case Full(user) =>
         comment.idUser(user._id.get)
-        if(comment.idUser != 1 && comment.save()){
-          comment.asPTVComment()
+        if(comment.save()){
+          comment.asPTVComment
         } else { null }
       case _ =>
         null
@@ -105,6 +108,7 @@ class CommentServlet extends HttpServlet{
       case e: Exception => error = true
     }
 
+
     error = req.getPathInfo != null ||
       user == null ||  text == null || title == null || error
 
@@ -117,7 +121,6 @@ class CommentServlet extends HttpServlet{
       } else {
         resp.setContentType("application/json")
         val writer = resp.getWriter
-        writer.print(userR)
         writer.close()
       }
     }
@@ -146,7 +149,7 @@ class CommentServlet extends HttpServlet{
       case e: Exception => error = true
     }
 
-    error = req.getPathInfo != null ||
+    error = req.getPathInfo != null || id == 1 ||
       text == null || title == null || error
 
     if(error){

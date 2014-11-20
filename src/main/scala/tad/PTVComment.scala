@@ -5,14 +5,14 @@ import java.util.Date
 import model.Comment
 import net.liftweb.common.Full
 
-class PTVComment (_id: Long
-                   , userId: Long
-                   , pId: Long
-                   , userMail: String
-                   , created_date: Date
-                   , modified_date: Date
-                   , title: String
-                   , text: String){
+class PTVComment (var _id: Long
+                   , var userId: Long
+                   , var pId: Long
+                   , var userMail: String
+                   , var created_date: Date
+                   , var modified_date: Date
+                   , var title: String
+                   , var text: String){
 
   def this(comment: Comment) = {
     this(comment._id.get
