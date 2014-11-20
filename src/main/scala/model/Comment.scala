@@ -1,6 +1,7 @@
 package model
 
 import net.liftweb.mapper._
+import tad.PTVComment
 
 class Comment extends LongKeyedMapper[Comment]{
   def getSingleton = Comment
@@ -12,10 +13,12 @@ class Comment extends LongKeyedMapper[Comment]{
   object idProd extends MappedLongForeignKey(this,Production)
   object idUser extends MappedLongForeignKey(this,User)
 
+  object title extends MappedString(this,255)
   object text extends MappedText(this)
   object creation_date extends MappedDateTime(this)
   object modified_date extends MappedDateTime(this)
 
+  def asPTVComment() = new PTVComment(this)
 }
 object Comment extends Comment with LongKeyedMetaMapper[Comment]{
 
