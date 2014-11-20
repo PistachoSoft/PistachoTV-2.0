@@ -39,6 +39,7 @@ class SearchServlet extends HttpServlet{
       case "u" =>
         val userList = User.findAllFields(
           Seq(User._id, User.name, User.surname, User.email)
+          , By_>(User._id,1)
           , Like(User.email, "%" + query + "%")
           , OrderBy(User.surname,Ascending)
           , OrderBy(User.name,Ascending)
@@ -72,6 +73,7 @@ class SearchServlet extends HttpServlet{
       case "u" =>
         val userList = User.findAllFields(
           Seq(User._id, User.name, User.surname, User.email)
+          , By_>(User._id,1)
           , OrderBy(User.surname,Ascending)
           , OrderBy(User.name,Ascending)
           , OrderBy(User.email,Ascending)
