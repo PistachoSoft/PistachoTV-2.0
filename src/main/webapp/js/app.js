@@ -57,7 +57,7 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
 
             .state('editor', {
                 url: "/post/id/:_id/edit",
-                templateUrl: "templates/main/editor.html",
+                templateUrl: "templates/main/creador.html",
                 controller: "EditorCtrl"
             });
 
@@ -225,6 +225,14 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
                 console.log(data);
             })
         };
+		
+		$scope.checkLogin = function(comment){
+			if(Login.getLoggedStatus() & (comment.userMail === Login.getUser())){
+				return true;
+			}else{
+				return false;
+			}
+		}
 
         $scope.submitComment = function(){
             $scope.hideSpinner = false;
@@ -315,7 +323,15 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
                 console.log(data);
             })
         };
-
+		
+		$scope.checkLogin = function(comment){
+			if(Login.getLoggedStatus() & (comment.userMail === Login.getUser())){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
         $scope.removeComment = function(id){
             $http({
                 method: 'DELETE',

@@ -86,7 +86,7 @@ class CommentServlet extends HttpServlet{
       case Full(user) =>
         comment.idUser(user._id.get)
         if(comment.save()){
-          comment.asPTVComment
+		  write(comment.asPTVComment)
         } else { null }
       case _ =>
         null
@@ -121,6 +121,7 @@ class CommentServlet extends HttpServlet{
       } else {
         resp.setContentType("application/json")
         val writer = resp.getWriter
+		writer.println(userR)
         writer.close()
       }
     }
