@@ -9,6 +9,7 @@ class PTVComment (var _id: Long
                    , var userId: Long
                    , var pId: Long
                    , var userMail: String
+                   , var prodTitle: String
                    , var created_date: Date
                    , var modified_date: Date
                    , var title: String
@@ -18,8 +19,12 @@ class PTVComment (var _id: Long
     this(comment._id.get
     , comment.idUser.get
     , comment.idProd.get
-    , comment.idUser.foreign match{
+    , comment.idUser.foreign match {
         case Full(user) => user.email.get
+        case _ => null
+      }
+    , comment.idProd.foreign match {
+        case Full(prod) => prod.title.get
         case _ => null
       }
     , comment.creation_date.get
