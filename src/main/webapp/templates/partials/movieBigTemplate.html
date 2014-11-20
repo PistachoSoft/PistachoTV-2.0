@@ -1,41 +1,86 @@
-<div class="jumbotron" style="text-align: left; height: 500px;">
-	<img height="100%" class="img img-responsive pull-right" ng-src="{{movie.image}}"/>
-	<h2 class="text-center">{{movie.title}}</h2>
-    <br>
-	<dl class="dl-horizontal">
-        <dt class="pull-left">Id:</dt>
-        <dd>{{movie._id}}</dd>
-        <dt class="pull-left">Type of production:</dt>
-        <dd>{{movie.typeProd}}</dd>
-		<dt class="pull-left">Year:</dt>
-		<dd>{{movie.year}}</dd>
-        <dt class="pull-left">Release:</dt>
-        <dd>{{movie.released}}</dd>
-        <dt class="pull-left">Language:</dt>
-        <dd>{{movie.language}}</dd>
-        <dt class="pull-left">Rated:</dt>
-        <dd>{{movie.rated}}</dd>
-        <dt class="pull-left">Runtime:</dt>
-        <dd>{{movie.runtime}}</dd>
-		<dt class="pull-left">Director:</dt>
-		<dd>{{movie.director}}</dd>
-        <dt class="pull-left">Writer:</dt>
-        <dd>{{movie.writer}}</dd>
-		<dt class="pull-left">Actors:</dt>
-		<dd>{{movie.actors}}</dd>
-		<dt class="pull-left">Genre:</dt>
-		<dd>{{movie.genre}}</dd>
-        <dt class="pull-left">Plot:</dt>
-        <dd>{{movie.plot}}</dd>
-	</dl>
-    <br>
-    <ul class="list-group">
-        <li class="list-group-item hoverable-item" ng-repeat="comment in movie.comments | orderBy:'-date'">
-            <h3 class="pull-left">{{comment.user}}</h3>
+<div class="jumbotron" style="text-align: left; min-height: 500px;">
+    <div class="row">
+        <div class="col-md-4 col-md-push-8">
+            <img height="100%" class="img img-responsive" ng-src="{{movie.image}}"/>
+        </div>
+        <div class="col-md-8 col-md-pull-4">
+            <h2 class="text-center">{{movie.title}}</h2>
             <br>
-            <h4 class="pull-right">{{comment.date}}</h4>
-            <br>
-            <p>{{comment.text}}</p>
-        </li>
-    </ul>
+            <dl class="dl-horizontal" style="text-align: left;">
+                <dt class="pull-left">Id:</dt>
+                <dd>{{movie._id}}</dd>
+                <dt class="pull-left">Type of production:</dt>
+                <dd>{{movie.typeProd}}</dd>
+                <dt class="pull-left">Year:</dt>
+                <dd>{{movie.year}}</dd>
+                <dt class="pull-left">Release:</dt>
+                <dd>{{movie.released}}</dd>
+                <dt class="pull-left">Language:</dt>
+                <dd>{{movie.language}}</dd>
+                <dt class="pull-left">Rated:</dt>
+                <dd>{{movie.rated}}</dd>
+                <dt class="pull-left">Runtime:</dt>
+                <dd>{{movie.runtime}}</dd>
+                <dt class="pull-left">Director:</dt>
+                <dd>{{movie.director}}</dd>
+                <dt class="pull-left">Writer:</dt>
+                <dd>{{movie.writer}}</dd>
+                <dt class="pull-left">Actors:</dt>
+                <dd>{{movie.actors}}</dd>
+                <dt class="pull-left">Genre:</dt>
+                <dd>{{movie.genre}}</dd>
+                <dt class="pull-left">Plot:</dt>
+                <dd>{{movie.plot}}</dd>
+            </dl>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-success btn-block" ng-click="showCommentForm = true" ng-hide="showCommentForm">Add comment</button>
+            <form class="" ng-submit="submitComment()" ng-show="showCommentForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" placeholder="Title" ng-model="comformtitle" required/>
+                    </div>
+                    <textarea class="form-control" rows="3" ng-model="comformtext" placeholder="Your comment" required></textarea>
+                </div>
+                <button class="btn btn-block btn-success" type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="col-md-12">
+            <ul class="list-group">
+                <li class="list-group-item hoverable-item" ng-repeat="comment in movie.comments | orderBy:'-created_date'">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a ng-href="#/u/id/{{comment.userid}}">
+                                <h3>{{comment.usermail}}</h3>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>{{comment.title}}</h3>
+                        </div>
+                        <div class="col-md-3">
+                            <a class="text-muted" ng-href="#/post/id/{{comment._id}}">{{comment.created_date}}</a>
+                            <br>
+                            <p class="text-muted">Modificado el {{comment.modified_date}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            {{comment.text}}
+                        </div>
+                    </div>
+                    <div class="row" ng-show="Login.getLoggedStatus() && {{comment.usermail}} === Login.getUser()">
+                        <div class="col-md-4 col-md-offset-8">
+                            <div class="btn-group">
+                                <button class="btn btn-warning" ng-href="#/post/id/{{comment._id}}/edit">Edit</button>
+                                <button class="btn btn-danger" ng-click="removeComment(comment._id)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

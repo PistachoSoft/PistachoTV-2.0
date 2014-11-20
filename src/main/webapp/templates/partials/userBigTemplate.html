@@ -1,24 +1,55 @@
 <div class="jumbotron" style="text-align: left">
-    <h2 class="text-center">{{user.name}} {{user.surname}}</h2>
-    <br>
-    <dl class="dl-horizontal">
-        <dt class="pull-left">Date of birth:</dt>
-        <dd>{{user.birthday.substring(0,11)}}</dd>
-        <dt class="pull-left">Email:</dt>
-        <dd>{{user.mail}}</dd>
-        <dt class="pull-left">Phone:</dt>
-        <dd>{{user.phone}}</dd>
-        <dt class="pull-left">Address:</dt>
-        <dd>{{user.address}}</dd>
-    </dl>
-    <br>
-    <ul class="list-group">
-        <li class="list-group-item hoverable-item" ng-repeat="comment in user.comments | orderBy:'-date'">
-            <h3 class="pull-left">{{comment.production}}</h3>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h2 class="text-center">{{user.name}} {{user.surname}}</h2>
             <br>
-            <h4 class="pull-right">{{comment.date}}</h4>
-            <br>
-            <p>{{comment.text}}</p>
-        </li>
-    </ul>
+            <dl class="dl-horizontal">
+                <dt class="pull-left">Date of birth:</dt>
+                <dd>{{user.birthday.substring(0,11)}}</dd>
+                <dt class="pull-left">Email:</dt>
+                <dd>{{user.mail}}</dd>
+                <dt class="pull-left">Phone:</dt>
+                <dd>{{user.phone}}</dd>
+                <dt class="pull-left">Address:</dt>
+                <dd>{{user.address}}</dd>
+            </dl>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="list-group">
+                <li class="list-group-item hoverable-item" ng-repeat="comment in user.comments | orderBy:'-date'">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a ng-href="#/p/id/{{comment.pid}}">
+                                <h3>{{comment.production}}</h3>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>{{comment.title}}</h3>
+                        </div>
+                        <div class="col-md-3">
+                            <a class="text-muted" ng-href="#/post/id/{{comment._id}}">{{comment.created_date}}</a>
+                            <br>
+                            <p class="text-muted">Modificado el {{comment.modified_date}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            {{comment.text}}
+                        </div>
+                    </div>
+                    <div class="row" ng-show="Login.getLoggedStatus() && {{comment.usermail}} === Login.getUser()">
+                        <div class="col-md-4 col-md-offset-8">
+                            <div class="btn-group">
+                                <button class="btn btn-warning" ng-href="#/post/id/{{comment._id}}/edit">Edit</button>
+                                <button class="btn btn-danger" ng-click="removeComment(comment._id)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

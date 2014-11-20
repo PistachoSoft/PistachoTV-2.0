@@ -1,0 +1,74 @@
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsable">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/inicio">PistachoTV</a>
+        </div>
+        <div class="collapse navbar-collapse" id="collapsable">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a href="#/p/">Productions</a>
+                </li>
+                <li>
+                    <a href="#/u/">Users</a>
+                </li>
+                <li>
+                    <a href="#/acerca">About</a>
+                </li>
+                <li>
+                    <a href="http://www.pistachosoft.com">Back to PistachoSoft!</a>
+                </li>
+            </ul>
+            <navlogin></navlogin>
+        </div>
+        <searchbar></searchbar>
+    </div>
+</div>
+
+<div class="container">
+    <div class="jumbotron" style="text-align: left;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="page-header">
+                            <h1>{{comment.usermail}} commented on {{comment.prod}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>{{comment.title}}</h3>
+                    </div>
+                    <div class="col-md-3">
+                        <a class="text-muted" ng-href="#/post/id/{{comment._id}}">{{comment.created_date}}</a>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="text-muted">Modificado el {{comment.modified_date}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        {{comment.text}}
+                    </div>
+                </div>
+                <div class="row" ng-show="Login.getLoggedStatus() && {{comment.usermail}} === Login.getUser()">
+                    <div class="col-md-4 col-md-offset-8">
+                        <div class="btn-group">
+                            <button class="btn btn-warning" ng-href="submit()">Submit</button>
+                            <button class="btn btn-danger" ng-click="removeComment(comment._id)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer></footer>

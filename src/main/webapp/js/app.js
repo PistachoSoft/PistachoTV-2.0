@@ -47,6 +47,18 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
                 url: "/u/id/:_id",
                 templateUrl: "templates/main/usuario.html",
                 controller: "UserCtrl"
+            })
+
+            .state('comentario', {
+                url: "/post/id/:_id",
+                templateUrl: "templates/main/comentario.html",
+                controller: "CommentCtrl"
+            })
+
+            .state('editor', {
+                url: "/post/id/:_id/edit",
+                templateUrl: "templates/main/editor.html",
+                controller: "EditorCtrl"
             });
 
         $urlRouterProvider.otherwise('inicio');
@@ -199,9 +211,10 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
         });
     }])
 
-    .controller('ProductionCtrl', ['$scope', '$http', '$state', '$stateParams', function($scope,$http,$state,$stateParams) {
+    .controller('ProductionCtrl', ['$scope', '$http', '$state', '$stateParams', 'Login', function($scope,$http,$state,$stateParams,Login) {
         $scope.movie = [ ];
         $scope.hideSpinner = false;
+        $scope.showCommentForm = false;
 
         if(isNaN($stateParams._id)){
             $state.go('p');
@@ -212,6 +225,69 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
                 console.log(data);
             })
         };
+
+        $scope.submitComment = function(){
+            $scope.hideSpinner = false;
+
+            $http({
+                method: 'POST',
+                url: '/comment',
+                data: 'pid='+$scope.movie._id +'&' +
+                    'user='+Login.getUser()+'&' +
+                    'title='+$scope.comformtitle+'&' +
+                    'text='+$scope.comformtext
+                ,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).success(function(data,status){
+                $scope.hideSpinner = true;
+                $scope.showCommentForm = false;
+                $scope.movie.comments.push(data);
+            }).error(function(data,status){
+                alert('Revise el formulario, todos los campos son necesarios');
+                $scope.hideSpinner = true;
+            })
+        };
+
+        $scope.removeComment = function(id){
+            $http({
+                method: 'DELETE',
+                url: '/comment/'+id
+            }).success(function(){
+                $state.go($state.current,$stateParams,{reload: true});
+            })
+        };
+
+        //TEST
+        /*
+         $scope.submitComment = function(){
+             $scope.movie.comments.push({
+                 _id: 2,
+                 userid: 1,
+                 usermail: Login.getUser(),
+                 date: '01/01/1993',
+                 title: $scope.comformtitle,
+                 text: $scope.comformtext
+             })
+         }
+
+        $scope.movie.comments.push({
+            _id: 0,
+            userid: 0,
+            usermail: 'anon@not.need',
+            date: '01/01/1990',
+            title: '2good4me',
+            text: 'this'
+        },
+        {
+            _id: 1,
+            userid: 1,
+            usermail: '6uitar6reat6od@gmail.com',
+            date: '01/01/1991',
+            title: 'wtf',
+            text: 'was this shit about lol ggwp'
+        })*/
     }])
 
     .controller('UsersCtrl', ['$scope', '$http', '$stateParams', function($scope,$http,$stateParams){
@@ -223,9 +299,10 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
             $scope.users = data;
             console.log(data);
         });
+
     }])
 
-    .controller('UserCtrl', ['$scope', '$http', '$state', '$stateParams', function($scope,$http,$state,$stateParams) {
+    .controller('UserCtrl', ['$scope', '$http', '$state', '$stateParams', 'Login', function($scope,$http,$state,$stateParams,Login) {
         $scope.user = [ ];
         $scope.hideSpinner = false;
 
@@ -236,6 +313,73 @@ angular.module('starter', ['ui.router', 'angularSpinner'])
                 $scope.hideSpinner = true;
                 $scope.user = data;
                 console.log(data);
+            })
+        };
+
+        $scope.removeComment = function(id){
+            $http({
+                method: 'DELETE',
+                url: '/comment/'+id
+            }).success(function(){
+                $state.go($state.current,$stateParams,{reload: true});
+            })
+        };
+    }])
+
+    .controller('CommentCtrl', ['$scope', '$http', '$state', '$stateParams', 'Login', function($scope,$http,$state,$stateParams,Login){
+        $scope.comment = [ ];
+        $scope.hideSpinner = false;
+
+        if(isNaN($stateParams._id)){
+            $state.go('inicio');
+        }else {
+            $http({ method: 'GET', url: '/comment/' + $stateParams._id }).success(function (data) {
+                $scope.hideSpinner = true;
+                $scope.comment = data;
+                console.log(data);
+            })
+        };
+
+        $scope.removeComment = function(id){
+            $http({
+                method: 'DELETE',
+                url: '/comment/'+id
+            }).success(function(){
+                $state.go($state.current,$stateParams,{reload: true});
+            })
+        };
+    }])
+
+    .controller('EditorCtrl', ['$scope', '$http', '$state', '$stateParams', 'Login', function($scope,$http,$state,$stateParams,Login){
+        $scope.comment = [ ];
+        $scope.hideSpinner = false;
+
+        if(isNaN($stateParams._id)){
+            $state.go('inicio');
+        }else {
+            $http({ method: 'GET', url: '/comment/' + $stateParams._id }).success(function (data) {
+                $scope.comment = data;
+                $scope.hideSpinner = true;
+                console.log(data);
+            })
+        };
+
+        $scope.commit = function(){
+            $http({ method: 'PUT', url: '/comment/',
+                data: 'id='+comment._id+'&' +
+                    'title='+$scope.comformtitle+'&' +
+                    'text='+$scope.comformtitle
+            }).success(function (data) {
+                $state.go('/post/id/:_id', {_id: $scope.comment.id});
+            })
+        };
+
+        $scope.removeComment = function(){
+            $http({
+                method: 'DELETE',
+                url: '/comment/'+comment._id
+            }).success(function(){
+                $state.go('inicio');
             })
         };
     }])
