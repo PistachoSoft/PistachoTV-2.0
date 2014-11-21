@@ -1,0 +1,16 @@
+<form ng-controller="MainCtrl" ng-submit="search()">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon">Search</span>
+            <input id="searchInputQuery" type="text" class="form-control" value="" placeholder="something..." name="q" ng-model="q">
+            <span class="input-group-addon">in</span>
+            <select id="searchInputType" name="t" ng-model="t" class="form-control">
+                <option value="p">Productions</option>
+                <option value="u">Users</option>
+            </select>
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">Find!</button>
+            </span>
+        </div>
+    </div>
+</form>

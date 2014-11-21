@@ -1,0 +1,44 @@
+body {
+	background: #697;	
+}
+
+/*.navbar-header {
+	float: left;
+	text-align: center;
+}*/
+
+.row {
+	text-align: center;
+}
+
+.myPanel {
+	padding-top: 100px;
+}
+
+.dropdown-menu .sub-menu {
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    margin-top: -1px;
+}
+
+.dropdown-menu li:hover .sub-menu {
+    visibility: visible;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.padding-10-bot {
+    padding-top: 10px;
+}
+
+.hoverable-item {
+	border: 1px solid #ABABAB;
+}
+
+.hoverable-item:hover {
+	border-color: #697;
+	border-width: 2px;
+}

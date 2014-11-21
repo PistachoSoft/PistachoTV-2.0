@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PistachoTV 2.0</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/pistachocss.css" rel="stylesheet">
+    <link href="css/rig.css" rel="stylesheet">
+
+    <style typ="text/css">
+        #footer {
+            padding-top: 50px;
+        }
+        /* Lastly, apply responsive CSS fixes as necessary */
+        @media (max-width: 767px) {
+            #footer {
+                margin-left: -20px;
+                margin-right: -20px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+
+    <!-- jquery -->
+    <script src="js/jquery.min.js"></script>
+    <!-- angular js -->
+    <script src="js/angular.min.js"></script>
+    <!-- ui.router -->
+    <script src="js/angular-ui-router.js"></script>
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <!-- bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- spinner -->
+    <script src="js/spin.js"></script>
+    <script src="js/angular-spinner.js"></script>
+    <!-- cryptojs -->
+    <script src="js/sha256.js"></script>
+    <!-- infinite-scroll -->
+    <script src="js/ng-infinite-scroll.js"></script>
+
+</head>
+<body ng-app="starter" style="padding-top: 50px;">
+<ui-view></ui-view>
+</body>
+</html>

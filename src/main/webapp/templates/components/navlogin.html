@@ -1,0 +1,11 @@
+<ul class="nav navbar-nav navbar-right" ng-controller="LoginCtrl">
+    <li ng-hide="logged">
+        <a href="#/registro">Log in</a>
+    </li>
+    <li ng-show="logged">
+        <p style="padding-top: 15px;">Logged in as {{user}}</p>
+    </li>
+    <li ng-show="logged">
+        <a ng-click="logout()">Exit</a>
+    </li>
+</ul>

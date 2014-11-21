@@ -1,0 +1,59 @@
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsable">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/inicio">PistachoTV</a>
+        </div>
+        <div class="collapse navbar-collapse" id="collapsable">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a href="#/p/">Productions</a>
+                </li>
+                <li>
+                    <a href="#/u/">Users</a>
+                </li>
+                <li>
+                    <a href="#/acerca">About</a>
+                </li>
+                <li>
+                    <a href="http://www.pistachosoft.com">Back to PistachoSoft!</a>
+                </li>
+            </ul>
+            <navlogin></navlogin>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row myPanel">
+        <div class="jumbotron">
+            <h3>Welcome to PistachoTV 2.0!</h3>
+            <br>
+            <form ng-submit="search()">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">Search</span>
+                        <input id="searchInputQuery" type="text" class="form-control" value="" placeholder="something..." name="q" ng-model="q">
+                        <span class="input-group-addon">in</span>
+                        <select id="searchInputType" name="t" ng-model="t" class="form-control">
+                            <option value="p">Productions</option>
+                            <option value="u">Users</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <button type="submit" class="btn btn-primary">Find!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer></footer>
