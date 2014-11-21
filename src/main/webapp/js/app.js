@@ -377,6 +377,14 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
             })
         };
 
+        $scope.checkLogin = function(){
+            if(Login.getLoggedStatus() & ($scope.comment.userMail === Login.getUser())){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         $scope.removeComment = function(id){
             $http({
                 method: 'DELETE',
@@ -396,16 +404,26 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         }else {
             $http({ method: 'GET', url: '/comment/' + $stateParams._id }).success(function (data) {
                 $scope.comment = data;
+                $scope.comformtitle = $scope.comment.title;
+                $scope.comformtext = $scope.comment.text;
                 $scope.hideSpinner = true;
                 console.log(data);
             })
         };
 
+        $scope.checkLogin = function(){
+            if(Login.getLoggedStatus() & ($scope.comment.userMail === Login.getUser())){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
         $scope.commit = function(){
             $http({ method: 'PUT', url: '/comment/',
-                data: 'id='+comment._id+'&' +
+                data: 'id='+$scope.comment._id+'&' +
                     'title='+$scope.comformtitle+'&' +
-                    'text='+$scope.comformtitle
+                    'text='+$scope.comformtext
             }).success(function (data) {
                 $state.go('/post/id/:_id', {_id: $scope.comment.id});
             })
@@ -414,7 +432,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         $scope.removeComment = function(){
             $http({
                 method: 'DELETE',
-                url: '/comment/'+comment._id
+                url: '/comment/'+$scope.comment._id
             }).success(function(){
                 $state.go('inicio');
             })

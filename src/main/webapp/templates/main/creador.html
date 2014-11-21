@@ -37,34 +37,45 @@
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="page-header">
-                            <h1>{{comment.usermail}} commented on {{comment.prod}}</h1>
+                            <h3>
+                                <a ng-href="#/u/id/{{comment.userId}}">
+                                    {{comment.userMail}}
+                                </a>
+                                commented on
+                                <a ng-href="#/p/id/{{comment.pId}}">
+                                    {{comment.prodTitle}}
+                                </a>
+                            </h3>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>{{comment.title}}</h3>
-                    </div>
-                    <div class="col-md-3">
-                        <a class="text-muted" ng-href="#/post/id/{{comment._id}}">{{comment.created_date}}</a>
-                    </div>
-                    <div class="col-md-3">
-                        <p class="text-muted">Modificado el {{comment.modified_date}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        {{comment.text}}
-                    </div>
-                </div>
-                <div class="row" ng-show="Login.getLoggedStatus() && {{comment.usermail}} === Login.getUser()">
-                    <div class="col-md-4 col-md-offset-8">
-                        <div class="btn-group">
-                            <button class="btn btn-warning" ng-href="submit()">Submit</button>
-                            <button class="btn btn-danger" ng-click="removeComment(comment._id)">Delete</button>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="row" style="font-size: 12px">
+                            <div class="col-md-6 col-md-offset-3">
+                                <input type="text" class="form-control" placeholder="Title" ng-model="comformtitle" required/>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="text-muted" ng-href="#/post/id/{{comment._id}}">{{comment.created_date.substring(0,10)}}</a>
+                                <br>
+                                <p class="text-muted" style="font-size: 12px">Modificado el {{comment.modified_date.substring(0,10)}}</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1" style="text-align: left;">
+                                <textarea class="form-control" rows="3" ng-model="comformtext" placeholder="Your comment" required></textarea>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="checkLogin()">
+                            <div class="col-md-4 col-md-offset-8">
+                                <div class="btn-group pull-right">
+                                    <button class="btn btn-success" ng-click="commit()">Submit</button>
+                                    <button class="btn btn-danger" ng-click="removeComment(comment._id)">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

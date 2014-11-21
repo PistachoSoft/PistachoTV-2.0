@@ -35,12 +35,15 @@
         </div>
     </div>
     <br>
-    <div class="row">
+    <div class="row" ng-hide="showCommentForm">
         <div class="col-md-4 col-xs-12">
-            <button class="btn btn-success btn-block" ng-click="showCommentForm = true" ng-hide="showCommentForm">Add comment</button>
+            <button class="btn btn-success btn-block" ng-click="showCommentForm = true">Add comment</button>
         </div>
-        <div class="col-md-12">
-            <form class="" ng-submit="submitComment()" ng-show="showCommentForm">
+        <br>
+    </div>
+    <div class="row">
+        <div class="col-md-12" ng-show="showCommentForm">
+            <form class="" ng-submit="submitComment()">
                 <div class="row">
                     <div class="col-md-3">
                         <input type="text" class="form-control" placeholder="Title" ng-model="comformtitle" required/>
