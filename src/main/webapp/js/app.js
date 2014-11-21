@@ -277,36 +277,6 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
                 $state.go($state.current,$stateParams,{reload: true});
             })
         };
-
-        //TEST
-        /*
-         $scope.submitComment = function(){
-             $scope.movie.comments.push({
-                 _id: 2,
-                 userid: 1,
-                 usermail: Login.getUser(),
-                 date: '01/01/1993',
-                 title: $scope.comformtitle,
-                 text: $scope.comformtext
-             })
-         }
-
-        $scope.movie.comments.push({
-            _id: 0,
-            userid: 0,
-            usermail: 'anon@not.need',
-            date: '01/01/1990',
-            title: '2good4me',
-            text: 'this'
-        },
-        {
-            _id: 1,
-            userid: 1,
-            usermail: '6uitar6reat6od@gmail.com',
-            date: '01/01/1991',
-            title: 'wtf',
-            text: 'was this shit about lol ggwp'
-        })*/
     }])
 
     .controller('UsersCtrl', ['$scope', '$http', '$stateParams', function($scope,$http,$stateParams){
@@ -423,9 +393,12 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
             $http({ method: 'PUT', url: '/comment',
                 data: 'id='+$scope.comment._id+'&' +
                     'title='+$scope.comformtitle+'&' +
-                    'text='+$scope.comformtext
+                    'text='+$scope.comformtext,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
             }).success(function (data) {
-                $state.go('/post/id/:_id', {_id: $scope.comment.id});
+                $state.go('comentario', {_id: $scope.comment._id});
             })
         };
 
