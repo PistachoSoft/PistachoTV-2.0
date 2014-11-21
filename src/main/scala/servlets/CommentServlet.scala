@@ -150,7 +150,7 @@ class CommentServlet extends HttpServlet{
       case e: Exception => error = true
     }
 
-    error = req.getPathInfo != null || id == 1 ||
+    error = req.getPathInfo != null ||
       text == null || title == null || error
 
     if(error){

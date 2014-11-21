@@ -420,7 +420,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         }
 
         $scope.commit = function(){
-            $http({ method: 'PUT', url: '/comment/',
+            $http({ method: 'PUT', url: '/comment',
                 data: 'id='+$scope.comment._id+'&' +
                     'title='+$scope.comformtitle+'&' +
                     'text='+$scope.comformtext
