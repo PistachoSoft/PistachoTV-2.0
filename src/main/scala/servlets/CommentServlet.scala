@@ -25,14 +25,12 @@ class CommentServlet extends HttpServlet{
       case e: Exception => error = true;
     }
 
-    error |= id == 1
-
     if(error) {
       resp.sendError(HSResp.SC_BAD_REQUEST)
     } else {
       Comment.findByKey(id) match {
         case Full(comment) =>
-          if(! comment.delete_!) {
+          if(comment.idUser.get != 1 && ! comment.delete_!) {
             resp.sendError(HSResp.SC_BAD_REQUEST)
           }
         case _ =>
@@ -133,8 +131,8 @@ class CommentServlet extends HttpServlet{
         comment.text(text)
         comment.title(title)
         comment.modified_date(new Date)
-        comment.save()
-      case _ =>
+        comment.idUser.get != 1 && comment.save()
+      case _ => false
     }
   }
 
@@ -143,6 +141,7 @@ class CommentServlet extends HttpServlet{
     val text = req.getParameter("text")
     val title = req.getParameter("title")
     var error = false
+
 
     try{
       id = req.getParameter("id").toLong
@@ -153,10 +152,13 @@ class CommentServlet extends HttpServlet{
     error = req.getPathInfo != null ||
       text == null || title == null || error
 
+    println(error)
+
     if(error){
       resp.sendError(HSResp.SC_BAD_REQUEST)
     } else{
-      overrideComment(id,text,title)
+      if(!overrideComment(id,text,title))
+        resp.sendError(HSResp.SC_BAD_REQUEST)
     }
   }
 }
