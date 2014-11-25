@@ -13,15 +13,17 @@ class Boot {
     DB.defineConnectionManager(DefaultConnectionIdentifier, myDBVendor)
 
     MapperRules.createForeignKeys_? = _ => true
+
     // Use Lift's Mapper ORM to populate the database
-    // you don't need to use Mapper to use Lift... use
-    // any ORM you want
     Schemifier.schemify(true, Schemifier.infoF _, User, Production, Comment)
 
   }
 
 }
 
+/**
+ * Connection pool
+ */
 object myDBVendor extends ConnectionManager {
   private var pool: List[Connection] = Nil
   private var poolSize = 0
@@ -32,7 +34,7 @@ object myDBVendor extends ConnectionManager {
   }
 
   private lazy val chooseURL = Props.mode match {
-    case _ => "jdbc:mysql://localhost:3306/testlift"
+    case _ => "jdbc:mysql://localhost:3306/pistachotv"
   }
 
   private def createOne: Box[Connection] = try {
@@ -41,7 +43,6 @@ object myDBVendor extends ConnectionManager {
 
     Class.forName(driverName)
 
-//    val dm = DriverManager.getConnection(dbUrl,"pistachoroot","toor")
     val dm = (Props.get("db.user"), Props.get("db.pass")) match {
       case (Full(user), Full(pwd)) =>
         DriverManager.getConnection(dbUrl, user, pwd)

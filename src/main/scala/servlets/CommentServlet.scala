@@ -15,6 +15,11 @@ class CommentServlet extends HttpServlet{
   // json formats
   implicit val formats = net.liftweb.json.DefaultFormats
 
+  /**
+   * Call: /comment/{id} -> deletes the comment which {id} matches
+   * @param req
+   * @param resp
+   */
   override def doDelete(req: HSReq, resp: HSResp) = {
     var id: Long = 0
     var error = false
@@ -39,6 +44,11 @@ class CommentServlet extends HttpServlet{
     }
   }
 
+  /**
+   * Returns the comment which id is requested as json
+   * @param id
+   * @return a String if the comment exists otherwise returns null
+   */
   def getComment(id: Long) = {
     Comment.findByKey(id) match {
       case Full(comment) =>
@@ -47,6 +57,11 @@ class CommentServlet extends HttpServlet{
     }
   }
 
+  /**
+   * Call: /comment/{id} gets the comment which {id} matches
+   * @param req
+   * @param resp
+   */
   override def doGet(req: HSReq, resp: HSResp) = {
     var id: Long = 0
     var error = false
@@ -72,6 +87,16 @@ class CommentServlet extends HttpServlet{
     }
   }
 
+  /**
+   * Saves a new comment with all the data from it's parameters
+   * @param pid production's id
+   * @param userEmail user's email
+   * @param title comment's title
+   * @param text comment's body
+   * @param created comment's creation date
+   * @param modified comment's modification date
+   * @return the comment as json if created otherwise null
+   */
   def postComment(pid: Long, userEmail: String, title: String
                   , text: String, created: Date, modified: Date) = {
     val comment = Comment.create
@@ -91,6 +116,11 @@ class CommentServlet extends HttpServlet{
     }
   }
 
+  /**
+   * Saves a new comment into the DB
+   * @param req
+   * @param resp
+   */
   override def doPost(req: HSReq, resp: HSResp) = {
     var pid: Long = 0
     val user = req.getParameter("user")
@@ -125,6 +155,13 @@ class CommentServlet extends HttpServlet{
     }
   }
 
+  /**
+   * Overrides an existing comment
+   * @param id comment's id
+   * @param text comment's new body
+   * @param title comment's new title
+   * @return true if everything goes properly otherwise false
+   */
   def overrideComment(id: Long, text: String, title: String) = {
     Comment.findByKey(id) match {
       case Full(comment) =>
@@ -136,6 +173,11 @@ class CommentServlet extends HttpServlet{
     }
   }
 
+  /**
+   * Overrides a comment
+   * @param req
+   * @param resp
+   */
   override def doPut(req: HSReq, resp:HSResp) = {
     var id: Long = 0
     val text = req.getParameter("text")

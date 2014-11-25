@@ -12,6 +12,11 @@ class PTVProductionMin (  var _id: Long
     this(prod._id,prod.title,PTVProductionMin.genToolTip(prod.title),prod.year,prod.image)
   }
 
+  /**
+   * Parses the Production, which is a lift's Mapper, into an object that can be parsed
+   * into json with its correct format
+   * @param prod
+   */
   def this(prod: Production) = {
     this(prod._id.get
       ,PTVProductionMin.genToolTip(prod.title.get)

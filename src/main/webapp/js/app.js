@@ -128,7 +128,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
 
             $http({
                 method: 'GET',
-                url: '/login?email='+form_loginemail+'&pass='+CryptoJS.SHA256(form_loginpassword)
+                url: window.location.pathname + '/login?email='+form_loginemail+'&pass='+CryptoJS.SHA256(form_loginpassword)
             }).success(function(data,status){
                 if(status === 200){
                     Login.setLoggedStatus(true);
@@ -166,7 +166,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
                 form_pass === form_repass){
                 $http({
                     method: 'POST',
-                    url: '/register',
+                    url: window.location.pathname + '/register',
                     data: 'name=' + form_name+'&' +
                             'surname='+form_lastname+'&' +
                             'birthday='+form_birthday+'&' +
@@ -205,7 +205,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         $scope.hideSpinner = false;
         $scope.currentPage = 1;
 
-        $http({ method: 'GET', url: '/search?t=p&q='+$stateParams._query+'&p='+$scope.currentPage }).success(function(data){
+        $http({ method: 'GET', url: window.location.pathname + '/search?t=p&q='+$stateParams._query+'&p='+$scope.currentPage }).success(function(data){
             $scope.hideSpinner = true;
             $scope.movies = data;
             console.log(data);
@@ -213,7 +213,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
 
         $scope.loadMoreProductions = function() {
             $scope.currentPage += 1;
-            $http({ method: 'GET', url: '/search?t=p&q='+$stateParams._query+'&p='+$scope.currentPage }).success(function(data){
+            $http({ method: 'GET', url: window.location.pathname + '/search?t=p&q='+$stateParams._query+'&p='+$scope.currentPage }).success(function(data){
                 for(var i = 0; i < data.length; i++) {
                     $scope.movies.push(data[i])
                 }
@@ -230,7 +230,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         if(isNaN($stateParams._id)){
             $state.go('p');
         }else {
-            $http({ method: 'GET', url: '/display?t=p&id=' + $stateParams._id }).success(function (data) {
+            $http({ method: 'GET', url: window.location.pathname + '/display?t=p&id=' + $stateParams._id }).success(function (data) {
                 $scope.hideSpinner = true;
                 $scope.movie = data;
                 console.log(data);
@@ -250,7 +250,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
 
             $http({
                 method: 'POST',
-                url: '/comment',
+                url: window.location.pathname + '/comment',
                 data: 'pid='+$scope.movie._id +'&' +
                     'user='+Login.getUser()+'&' +
                     'title='+$scope.comformtitle+'&' +
@@ -272,7 +272,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         $scope.removeComment = function(id){
             $http({
                 method: 'DELETE',
-                url: '/comment/'+id
+                url: window.location.pathname + '/comment/'+id
             }).success(function(){
                 $state.go($state.current,$stateParams,{reload: true});
             })
@@ -284,7 +284,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         $scope.hideSpinner = false;
         $scope.currentPage = 0;
 
-        $http({ method: 'GET', url: '/search?t=u&q='+$stateParams._query+'&p=1'+$scope.currentPage }).success(function(data){
+        $http({ method: 'GET', url: window.location.pathname + '/search?t=u&q='+$stateParams._query+'&p=1'+$scope.currentPage }).success(function(data){
             $scope.hideSpinner = true;
             $scope.users = data;
             console.log(data);
@@ -292,7 +292,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
 
         $scope.loadMoreUsers = function() {
             $scope.currentPage += 1;
-            $http({ method: 'GET', url: '/search?t=u&q='+$stateParams._query+'&p='+$scope.currentPage }).success(function(data){
+            $http({ method: 'GET', url: window.location.pathname + '/search?t=u&q='+$stateParams._query+'&p='+$scope.currentPage }).success(function(data){
                 for(var i = 0; i < data.length; i++) {
                     $scope.users.push(data[i])
                 }
@@ -308,7 +308,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         if(isNaN($stateParams._id)){
             $state.go('u');
         }else {
-            $http({ method: 'GET', url: '/display?t=u&id=' + $stateParams._id }).success(function (data) {
+            $http({ method: 'GET', url: window.location.pathname + '/display?t=u&id=' + $stateParams._id }).success(function (data) {
                 $scope.hideSpinner = true;
                 $scope.user = data;
                 console.log(data);
@@ -326,7 +326,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         $scope.removeComment = function(id){
             $http({
                 method: 'DELETE',
-                url: '/comment/'+id
+                url: window.location.pathname + '/comment/'+id
             }).success(function(){
                 $state.go($state.current,$stateParams,{reload: true});
             })
@@ -340,7 +340,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         if(isNaN($stateParams._id)){
             $state.go('inicio');
         }else {
-            $http({ method: 'GET', url: '/comment/' + $stateParams._id }).success(function (data) {
+            $http({ method: 'GET', url: window.location.pathname + '/comment/' + $stateParams._id }).success(function (data) {
                 $scope.hideSpinner = true;
                 $scope.comment = data;
                 console.log(data);
@@ -358,7 +358,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         $scope.removeComment = function(id){
             $http({
                 method: 'DELETE',
-                url: '/comment/'+id
+                url: window.location.pathname + '/comment/'+id
             }).success(function(){
                 $state.go($state.current,$stateParams,{reload: true});
             })
@@ -372,7 +372,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         if(isNaN($stateParams._id)){
             $state.go('inicio');
         }else {
-            $http({ method: 'GET', url: '/comment/' + $stateParams._id }).success(function (data) {
+            $http({ method: 'GET', url: window.location.pathname + '/comment/' + $stateParams._id }).success(function (data) {
                 $scope.comment = data;
                 $scope.comformtitle = $scope.comment.title;
                 $scope.comformtext = $scope.comment.text;
@@ -390,7 +390,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         }
 
         $scope.commit = function(){
-            $http({ method: 'PUT', url: '/comment',
+            $http({ method: 'PUT', url: window.location.pathname + '/comment',
                 data: 'id='+$scope.comment._id+'&' +
                     'title='+$scope.comformtitle+'&' +
                     'text='+$scope.comformtext,
@@ -405,7 +405,7 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
         $scope.removeComment = function(){
             $http({
                 method: 'DELETE',
-                url: '/comment/'+$scope.comment._id
+                url: window.location.pathname + '/comment/'+$scope.comment._id
             }).success(function(){
                 $state.go('inicio');
             })
@@ -415,48 +415,48 @@ angular.module('starter', ['ui.router', 'angularSpinner', 'infinite-scroll'])
     .directive('producciones', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/partials/movieTemplate.html'
+            templateurl: window.location.pathname + 'templates/partials/movieTemplate.html'
         };
     })
 
     .directive('produccion', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/partials/movieBigTemplate.html'
+            templateurl: window.location.pathname + 'templates/partials/movieBigTemplate.html'
         };
     })
 
     .directive('usuarios', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/partials/userTemplate.html'
+            templateurl: window.location.pathname + 'templates/partials/userTemplate.html'
         };
     })
 
     .directive('usuario', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/partials/userBigTemplate.html'
+            templateurl: window.location.pathname + 'templates/partials/userBigTemplate.html'
         };
     })
 
     .directive('footer', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/components/footer.html'
+            templateurl: window.location.pathname + 'templates/components/footer.html'
         }
     })
 
     .directive('searchbar', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/components/searchBar.html'
+            templateurl: window.location.pathname + 'templates/components/searchBar.html'
         }
     })
 
     .directive('navlogin', function(){
         return {
             restrict: 'E',
-            templateUrl: 'templates/components/navlogin.html'
+            templateurl: window.location.pathname + 'templates/components/navlogin.html'
         }
     });

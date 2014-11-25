@@ -19,7 +19,11 @@ class PTVProduction (  var _id: Long
                      , var image: String
                      , var comments: List[PTVComment]){
 
-
+  /**
+   * Parses the Production, which is a lift's Mapper, into an object that can be parsed
+   * into json with its correct format
+   * @param prod
+   */
   def this(prod: Production) = {
     this(prod._id.get
     ,prod.title.get
@@ -39,6 +43,10 @@ class PTVProduction (  var _id: Long
             .map(x => new PTVComment(x)))
   }
 
+  /**
+   * Parses an OMBDProduction, used to save all the data
+   * @param omdbproduction
+   */
   def this(omdbproduction: OMDBProduction) = {
     this(0
         ,omdbproduction.Title
@@ -57,6 +65,10 @@ class PTVProduction (  var _id: Long
         ,null)
   }
 
+  /**
+   * Used when dumping all the raw data into the BD
+   * @return
+   */
   def getRawProductionMapped = {
     val prod = Production.create
 

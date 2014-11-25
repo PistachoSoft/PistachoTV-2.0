@@ -6,6 +6,7 @@
 /.gradle/
 /.idea/
 /*.iml
+/index/
 /bin/
 /bin/
 /bin/

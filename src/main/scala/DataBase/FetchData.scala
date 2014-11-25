@@ -17,6 +17,9 @@ import scala.io.Source
 
 case object TaskDone
 
+/**
+ * Single actor that looks for the data into OMDB API
+ */
 class FetchDataActor extends Actor {
 
   def receive = {
@@ -32,6 +35,10 @@ class FetchDataActor extends Actor {
 
 }
 
+/**
+ * Controls the actor system
+ * @param toDo the number of actors the system will have
+ */
 class FetchDataController(var toDo: Int) extends Actor{
 
   def receive = {
@@ -43,6 +50,9 @@ class FetchDataController(var toDo: Int) extends Actor{
   }
 }
 
+/**
+ * Main object
+ */
 object FetchData {
 
   //json formats
@@ -91,6 +101,10 @@ object FetchData {
   }
 
 
+  /**
+   * main method
+   * @param args arguments
+   */
   def main(args: Array[String]) = {
     val system = ActorSystem("FetchSystem")
 
@@ -120,14 +134,7 @@ object FetchData {
     }
     
     // Wait for the actors to finish their task
-    try{
-      system.awaitTermination(Duration(5,MINUTES))
-    }
-    catch{
-      case te: TimeoutException =>
-        println("timeout!")
-    }
-    system.shutdown()
+    system.awaitTermination()
 
     println("Done | Total skipped: " + skippedCount)
 

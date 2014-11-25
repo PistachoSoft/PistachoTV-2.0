@@ -15,6 +15,11 @@ class PTVComment (var _id: Long
                    , var title: String
                    , var text: String){
 
+  /**
+   * Parses a Comment, which is a lift's Mapper, into an object that can be parsed
+   * into json with its correct format
+   * @param comment
+   */
   def this(comment: Comment) = {
     this(comment._id.get
     , comment.idUser.get

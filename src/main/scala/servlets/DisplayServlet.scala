@@ -13,10 +13,17 @@ class DisplayServlet extends HttpServlet{
   // json formats
   implicit val formats = net.liftweb.json.DefaultFormats
 
-  def fetchDB(typeSearch: String, i: Long) = {
+  /**
+   * Search in the DB for the user or production (depends on typeSearch) which
+   * {id} matches
+   * @param typeSearch
+   * @param id
+   * @return
+   */
+  def fetchDB(typeSearch: String, id: Long) = {
     typeSearch match {
       case "p" =>
-        Production.findByKey(i) match {
+        Production.findByKey(id) match {
           case Full(prod) =>
             write(prod.asPTVProduction)
           case _ =>
@@ -24,7 +31,7 @@ class DisplayServlet extends HttpServlet{
         }
 
       case "u" =>
-        User.findByKey(i) match {
+        User.findByKey(id) match {
           case Full(user) =>
             write(user.password(null).asPTVUser)
           case _ =>
@@ -33,6 +40,13 @@ class DisplayServlet extends HttpServlet{
     }
   }
 
+  /**
+   * Returns a json with the data asked, which can be:
+   *    - a user
+   *    - a production
+   * @param req
+   * @param resp
+   */
   override def doGet(req: HSReq, resp: HSResp) = {
     /*
     Parameters:

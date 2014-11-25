@@ -8,6 +8,17 @@ import model.User
 @WebServlet(urlPatterns = Array("/register"))
 class RegisterServlet extends HttpServlet{
 
+  /**
+   * Register the new user
+   * @param name its name
+   * @param surname its surname
+   * @param birthday its birthday
+   * @param address its address
+   * @param email its email
+   * @param password its password
+   * @param phone its phone
+   * @return its email in case the user is saved otherwise null
+   */
   def registerUser(name: String, surname: String, birthday: String, address: String, email: String
                    , password: String, phone: Int) = {
     val user = User.create
@@ -33,6 +44,11 @@ class RegisterServlet extends HttpServlet{
     }
   }
 
+  /**
+   * Register the new user into the DB
+   * @param req
+   * @param resp
+   */
   override def doPost(req: HSReq, resp: HSResp) = {
     var error = false
     val name = req.getParameter("name")

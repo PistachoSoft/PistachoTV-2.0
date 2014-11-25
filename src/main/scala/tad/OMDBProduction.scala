@@ -1,5 +1,28 @@
 package tad
 
+/**
+ * Used to generate the rawData.json
+ * @param Title
+ * @param Year
+ * @param Rated
+ * @param Released
+ * @param Runtime
+ * @param Genre
+ * @param Director
+ * @param Writer
+ * @param Actors
+ * @param Plot
+ * @param Language
+ * @param Country
+ * @param Awards
+ * @param Poster
+ * @param Metascore
+ * @param imdbRating
+ * @param imdbVotes
+ * @param imdbID
+ * @param Type
+ * @param Response
+ */
 class OMDBProduction (  var Title: String
                       , val Year: String
                       , val Rated: String

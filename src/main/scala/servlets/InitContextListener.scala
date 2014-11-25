@@ -7,6 +7,10 @@ import DataBase.DataDumper
 import bootstrap.liftweb.Boot
 import model.Production
 
+/**
+ * Context Initializer, loads lift's boot when the app is deployed if the model
+ * is empty it's loaded with resources/rawData.json saved by FetchData.scala
+ */
 @WebListener
 class InitContextListener extends ServletContextListener{
 
@@ -17,6 +21,8 @@ class InitContextListener extends ServletContextListener{
     if(Production.count == 0){
       println("No data found, dumping raw data")
       DataDumper.dumpRawData()
+
+      DataDumper.generateLuceneIndex()
     }
   }
 

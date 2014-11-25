@@ -19,7 +19,16 @@ class User extends LongKeyedMapper[User]{
   object phone extends MappedInt(this)
   object password extends MappedString(this, 255)
 
+  /**
+   * Parse this as a PTVUser
+   * @return a PTVUser
+   */
   def asPTVUser = new PTVUser(this)
+
+  /**
+   * Parse this as a PTVUserMin
+   * @return a PTVUserMin
+   */
   def asPTVUserMin = new PTVUserMin(this)
 
 }

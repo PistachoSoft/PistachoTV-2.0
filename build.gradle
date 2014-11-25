@@ -11,6 +11,7 @@ ext{
     scalaVersion = '2.11'
     scalaMinor = '4'
     liftVersion = '3.0-M2'
+    luceneVersion = '4.10.2'
 }
 
 repositories {
@@ -38,6 +39,10 @@ dependencies {
             "net.liftweb:lift-common_$scalaVersion:$liftVersion",
             "net.liftweb:lift-json_$scalaVersion:$liftVersion",
             'mysql:mysql-connector-java:5.1.33'
+
+    compile "org.apache.lucene:lucene-analyzers-common:$luceneVersion"
+    compile "org.apache.lucene:lucene-queryparser:$luceneVersion"
+    compile "org.apache.lucene:lucene-core:$luceneVersion"
 }
 
 // Scala dependencies

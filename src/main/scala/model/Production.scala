@@ -24,8 +24,16 @@ class Production extends LongKeyedMapper[Production]{
   object typeProd extends MappedString(this, 255)
   object image extends MappedString(this, 255)
 
+  /**
+   * Parse this as a PTVProduction
+   * @return a PTVProduction
+   */
   def asPTVProduction = new PTVProduction(this)
 
+  /**
+   * Parse this as a PTVProductionMin
+   * @return a PTVProductionMin
+   */
   def asPTVProductionMin = new PTVProductionMin(this)
 }
 

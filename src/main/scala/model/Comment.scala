@@ -18,8 +18,13 @@ class Comment extends LongKeyedMapper[Comment]{
   object creation_date extends MappedDateTime(this)
   object modified_date extends MappedDateTime(this)
 
+  /**
+   * parse this as a PTVComment
+   * @return PTVComment
+   */
   def asPTVComment = new PTVComment(this)
 }
+
 object Comment extends Comment with LongKeyedMetaMapper[Comment]{
 
   override def dbTableName = "comment"
