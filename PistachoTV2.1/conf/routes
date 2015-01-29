@@ -1,0 +1,26 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                                      controllers.Application.index
+
+GET         /production/:id                        controllers.ProdCont.findProduction(id: Long)
+GET         /productions/page/:page                controllers.ProdCont.listProductions(page: Int)
+GET         /productions/:filter/page/:page        controllers.ProdCont.listProductionsF(page: Int,filter: String)
+GET         /lucene/:filter/page/:page             controllers.ProdCont.listProductionsL(page: Int, filter: String)
+GET         /lucene/page/:page                     controllers.ProdCont.listProductions(page: Int)
+
+GET         /user/:id                              controllers.UserCont.findUser(id: Long)
+GET         /users/page/:page                      controllers.UserCont.listUsers(page: Int)
+GET         /users/:filter/page/:page              controllers.UserCont.listUsersF(page: Int, filter: String)
+POST        /login                                 controllers.UserCont.login
+POST        /register                              controllers.UserCont.register
+
+GET         /comment/:id                           controllers.CommentCont.findComment(id: Long)
+POST        /comment                               controllers.CommentCont.newComment
+PUT         /comment                               controllers.CommentCont.edit
+GET         /comments/:id                          controllers.CommentCont.findComments(id: Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                          controllers.Assets.at(path="/public", file)
